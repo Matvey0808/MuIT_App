@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:serviceapp/data/splash_data.dart';
+import 'package:serviceapp/viewmodels/splash_view_model.dart';
+import 'package:serviceapp/views/registration_view.dart';
 import 'package:serviceapp/views/splash_view.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     
-    runApp(const MyApp());
+    runApp(
+      ChangeNotifierProvider(
+        create: (context) => SplashViewModel(),
+        child: MyApp(),
+      )
+    );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,6 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: SplashView(model: splashModel),
+      routes: {
+        '/registration': (context) => const RegistrationView()
+      },
     );
   }
 }
