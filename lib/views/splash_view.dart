@@ -24,7 +24,6 @@ class SplashView extends StatelessWidget {
         Navigator.pushReplacementNamed(context, viewModel.nextRoute!);
       });
     }
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -37,7 +36,7 @@ class SplashView extends StatelessWidget {
                   width: isTable ? 220 : 160,
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
-                    Colors.black54,
+                    Colors.black,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -50,7 +49,7 @@ class SplashView extends StatelessWidget {
                 children: [
                   viewModel.isLoading
                       ? SpinKitCircle(
-                        color: Colors.black26,
+                        color: Colors.black,
                         size: width * 0.09,
                         )
                       : Text(""),
@@ -58,7 +57,7 @@ class SplashView extends StatelessWidget {
                     model.title,
                     style: GoogleFonts.acme(
                       fontSize: isTable ? 110 : 50,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -66,7 +65,7 @@ class SplashView extends StatelessWidget {
                     model.version,
                     style: GoogleFonts.acme(
                       fontSize: isTable ? 30 : 15,
-                      color: Colors.black54,
+                      color: Colors.black,
                     ),
                   ),
                 ],
