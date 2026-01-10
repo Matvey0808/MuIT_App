@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:serviceapp/models/colors_model.dart';
 import 'package:serviceapp/models/registration_model.dart';
 
 class RegistrationView extends StatelessWidget {
   final RegistrationModels model;
+  final ColorsApp colors;
 
-  const RegistrationView({super.key, required this.model});
+  const RegistrationView({super.key, required this.model, required this.colors});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class RegistrationView extends StatelessWidget {
                   model.logo,
                   width: isTable ? width * 0.7 : width * 0.4,
                   colorFilter: ColorFilter.mode(
-                    Colors.black,
+                    colors.black,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -39,14 +41,14 @@ class RegistrationView extends StatelessWidget {
                     model.title1,
                     style: GoogleFonts.acme(
                       fontSize: isTable ? width * 0.2 : width * 0.1,
-                      color: Colors.black,
+                      color: colors.black,
                     ),
                   ),
                   SizedBox(height: height * 0.08),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF141718),
+                      backgroundColor: colors.black0xFF141718,
                       padding: EdgeInsets.symmetric(
                         vertical: width * 0.05,
                         horizontal: height * 0.17
@@ -65,7 +67,7 @@ class RegistrationView extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFE3E3E3),
+                      backgroundColor: colors.white0xFFE3E3E3,
                       padding: EdgeInsets.symmetric(
                         vertical: width * 0.05,
                         horizontal: height * 0.165
@@ -76,7 +78,7 @@ class RegistrationView extends StatelessWidget {
                       model.buttonSignUp,
                       style: TextStyle(
                         fontSize: height * 0.018,
-                        color: Colors.black26
+                        color: colors.black26
                       ),
                     ),
                   ),
@@ -85,7 +87,7 @@ class RegistrationView extends StatelessWidget {
                     model.title2,
                     style: TextStyle(
                       fontSize: height * 0.018,
-                      color: Colors.black38
+                      color: colors.black38
                     ),
                   ),
                   SizedBox(height: height * 0.03),

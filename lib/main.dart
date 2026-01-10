@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:serviceapp/data/colors_data.dart';
 import 'package:serviceapp/data/registration_data.dart';
+import 'package:serviceapp/data/sign_up_data.dart';
 import 'package:serviceapp/data/splash_data.dart';
-import 'package:serviceapp/models/registration_model.dart';
 import 'package:serviceapp/viewmodels/splash_view_model.dart';
 import 'package:serviceapp/views/registration_view.dart';
+import 'package:serviceapp/views/sign_up_view.dart';
 import 'package:serviceapp/views/splash_view.dart';
 
 void main() async {
@@ -30,9 +32,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFFF8F8FF),
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashView(model: splashModel),
+      home: SignUpView(colors: ColorApp, signup: SignUpModel), // SplashView(model: splashModel, colors: ColorApp),
       routes: {
-        '/registration': (context) => const RegistrationView(model: registrationModel)
+        '/registration': (context) => const RegistrationView(model: registrationModel, colors: ColorApp)
       },
     );
   }

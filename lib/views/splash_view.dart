@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:serviceapp/models/colors_model.dart';
 import 'package:serviceapp/models/splash_model.dart';
 import 'package:provider/provider.dart';
 import 'package:serviceapp/viewmodels/splash_view_model.dart';
@@ -8,8 +9,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashView extends StatelessWidget {
   final SplashModels model;
+  final ColorsApp colors;
 
-  const SplashView({super.key, required this.model});
+  const SplashView({super.key, required this.model, required this.colors});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,8 @@ class SplashView extends StatelessWidget {
 
     final isTable = width >= 600;
     final viewModel = context.watch<SplashViewModel>();
-
+    
+    // Я хз что это, но без этого не работает
     if (!viewModel.isLoading && viewModel.nextRoute != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushReplacementNamed(context, viewModel.nextRoute!);
@@ -36,7 +39,7 @@ class SplashView extends StatelessWidget {
                   width: isTable ? 220 : 160,
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
-                    Colors.black,
+                    colors.black,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -49,7 +52,7 @@ class SplashView extends StatelessWidget {
                 children: [
                   viewModel.isLoading
                       ? SpinKitCircle(
-                        color: Colors.black,
+                        color: colors.black,
                         size: width * 0.09,
                         )
                       : Text(""),
@@ -57,7 +60,7 @@ class SplashView extends StatelessWidget {
                     model.title,
                     style: GoogleFonts.acme(
                       fontSize: isTable ? 110 : 50,
-                      color: Colors.black,
+                      color: colors.black,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -65,7 +68,7 @@ class SplashView extends StatelessWidget {
                     model.version,
                     style: GoogleFonts.acme(
                       fontSize: isTable ? 30 : 15,
-                      color: Colors.black,
+                      color: colors.black,
                     ),
                   ),
                 ],
