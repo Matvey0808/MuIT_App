@@ -1,16 +1,23 @@
-# serviceapp
+# MuIT
 
-A new Flutter project.
+MuIT - мобильное Android-приложение для специалистов из IT-сферы. Это приложение объединяет поиск вакансий по всему миру и создание интерактивного резюме + портфолио в одном месте.
 
-## Getting Started
+## Возможности приложения
+* Поиск вакансий в разных странах
+* Сохранение вакансий в избранное
+* Возможность создать интерактивное резюме и портфолио
 
-This project is a starting point for a Flutter application.
+### Цель проекта
+Цель данного проекта - возможность искать вакансии по всему миру, а также создавать интерактивное резюме без необходимости использования сторонних сервисов.
 
-A few resources to get you started if this is your first Flutter project:
+### MVP (Minimum Viable Product)
+1. Поиск вакансий через HeadHunter API
+2. Простое добавление интерактивного резюме и портфолио
+3. Возможность добавления вакансии в избранное
+4. Редактирование профиля, резюме, портфолио
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Технологии
+* UI/business logic: Flutter
+* Связь: HeadHunter API
+* БД/Auth: Firebase
+#### Архитектура - MVVM (model-view-viewmodel)
