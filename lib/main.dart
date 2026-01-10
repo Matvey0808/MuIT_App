@@ -11,30 +11,33 @@ import 'package:serviceapp/views/sign_up_view.dart';
 import 'package:serviceapp/views/splash_view.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    
-    runApp(
-      ChangeNotifierProvider(
-        create: (context) => SplashViewModel(),
-        child: MyApp(),
-      )
-    );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SplashViewModel(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-    const MyApp({super.key});
+  const MyApp({super.key});
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFFF8F8FF),
-      ),
+      theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF8F8FF)),
       debugShowCheckedModeBanner: false,
-      home: SignUpView(colors: ColorApp, signup: SignUpModel), // SplashView(model: splashModel, colors: ColorApp),
+      home: SignUpView(
+        colors: ColorApp,
+        signup: SignUpModel,
+        models: registrationModel,
+      ), // SplashView(model: splashModel, colors: ColorApp),
       routes: {
-        '/registration': (context) => const RegistrationView(model: registrationModel, colors: ColorApp)
+        '/registration': (context) =>
+            const RegistrationView(model: registrationModel, colors: ColorApp),
       },
     );
   }
