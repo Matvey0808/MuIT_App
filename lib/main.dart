@@ -3,10 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:serviceapp/data/colors_data.dart';
 import 'package:serviceapp/data/registration_data.dart';
+import 'package:serviceapp/data/sign_in_data.dart';
 import 'package:serviceapp/data/sign_up_data.dart';
 import 'package:serviceapp/data/splash_data.dart';
+import 'package:serviceapp/models/registration_model.dart';
+import 'package:serviceapp/models/sign_in_model.dart';
 import 'package:serviceapp/viewmodels/splash_view_model.dart';
 import 'package:serviceapp/views/registration_view.dart';
+import 'package:serviceapp/views/sign_in_view.dart';
 import 'package:serviceapp/views/sign_up_view.dart';
 import 'package:serviceapp/views/splash_view.dart';
 
@@ -30,11 +34,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF8F8FF)),
       debugShowCheckedModeBanner: false,
-      home: SignUpView(
+      home: SignInView(
         colors: ColorApp,
-        signup: SignUpModel,
-        models: registrationModel,
-      ), // SplashView(model: splashModel, colors: ColorApp),
+        signin: SignInModels,
+        model: registrationModel,
+      ),
       routes: {
         '/registration': (context) =>
             const RegistrationView(model: registrationModel, colors: ColorApp),

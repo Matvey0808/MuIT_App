@@ -12,16 +12,6 @@ class CustomSignUpWidget extends StatelessWidget {
     final width = size.width;
     final height = size.height;
 
-   return Container(
-    width: width * 1,
-    height: height * 0.0095,
-     child: Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(2)
-      ),
-      color: colors.black26,
-     ),
-   );
+    return Container(width: width * 1, height: height * 0.0096, child: Card());
   }
 }
