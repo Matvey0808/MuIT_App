@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:serviceapp/models/colors_model.dart';
-import 'package:serviceapp/models/sign_up_models.dart';
 
 class TextFieldWidgetName extends StatefulWidget {
   final ColorsApp colors;
-  final SignUpModels textField;
 
-  const TextFieldWidgetName({
-    super.key,
-    required this.colors,
-    required this.textField,
-  });
+  const TextFieldWidgetName({super.key, required this.colors});
 
   @override
   State<TextFieldWidgetName> createState() => _TextFieldWidgetNameState();
@@ -31,8 +24,8 @@ class _TextFieldWidgetNameState extends State<TextFieldWidgetName> {
       controller: _controllerName,
       cursorColor: Colors.blueGrey[400],
       decoration: InputDecoration(
-        hintText: widget.textField.hintTextName,
-        hintStyle: GoogleFonts.acme(
+        hintText: "Full Name",
+        hintStyle: TextStyle(
           fontSize: isTable ? width * 0.08 : width * 0.04,
           color: widget.colors.black38,
         ),
@@ -65,13 +58,8 @@ class _TextFieldWidgetNameState extends State<TextFieldWidgetName> {
 
 class TextFieldWidgetEmail extends StatefulWidget {
   final ColorsApp colors;
-  final SignUpModels textField;
 
-  const TextFieldWidgetEmail({
-    super.key,
-    required this.colors,
-    required this.textField,
-  });
+  const TextFieldWidgetEmail({super.key, required this.colors});
 
   @override
   State<TextFieldWidgetEmail> createState() => _TextFieldWidgetEmailState();
@@ -90,8 +78,8 @@ class _TextFieldWidgetEmailState extends State<TextFieldWidgetEmail> {
       controller: _controllerEmail,
       cursorColor: Colors.blueGrey[400],
       decoration: InputDecoration(
-        hintText: widget.textField.hintTextEmail,
-        hintStyle: GoogleFonts.acme(
+        hintText: "Enter Your Email",
+        hintStyle: TextStyle(
           fontSize: isTable ? width * 0.08 : width * 0.04,
           color: widget.colors.black38,
         ),
@@ -124,13 +112,8 @@ class _TextFieldWidgetEmailState extends State<TextFieldWidgetEmail> {
 
 class TextFieldWidgetPassword extends StatefulWidget {
   final ColorsApp colors;
-  final SignUpModels textField;
 
-  const TextFieldWidgetPassword({
-    super.key,
-    required this.colors,
-    required this.textField,
-  });
+  const TextFieldWidgetPassword({super.key, required this.colors});
 
   @override
   State<TextFieldWidgetPassword> createState() =>
@@ -138,7 +121,7 @@ class TextFieldWidgetPassword extends StatefulWidget {
 }
 
 class _TextFieldWidgetPasswordState extends State<TextFieldWidgetPassword> {
-  bool isPasswordVisible = false;
+  bool isPasswordVisible = true;
   final TextEditingController _controllerPassword = TextEditingController();
 
   @override
@@ -153,8 +136,8 @@ class _TextFieldWidgetPasswordState extends State<TextFieldWidgetPassword> {
       obscureText: isPasswordVisible,
       cursorColor: Colors.blueGrey[400],
       decoration: InputDecoration(
-        hintText: widget.textField.hintTextPassword,
-        hintStyle: GoogleFonts.acme(
+        hintText: "Password",
+        hintStyle: TextStyle(
           fontSize: isTable ? width * 0.08 : width * 0.04,
           color: widget.colors.black38,
         ),

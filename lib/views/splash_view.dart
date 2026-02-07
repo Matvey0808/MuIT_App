@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:serviceapp/models/colors_model.dart';
-import 'package:serviceapp/models/splash_model.dart';
-import 'package:provider/provider.dart';
-import 'package:serviceapp/viewmodels/splash_view_model.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class SplashView extends StatelessWidget {
-  final SplashModels model;
+class SplashView extends StatefulWidget {
   final ColorsApp colors;
 
-  const SplashView({super.key, required this.model, required this.colors});
+  const SplashView({super.key, required this.colors});
+
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  bool _isLoading = true;
+
+  void initState() {
+    super.initState();
+    isLoading();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,56 +26,51 @@ class SplashView extends StatelessWidget {
     final width = size.width;
 
     final isTable = width >= 600;
-    final viewModel = context.watch<SplashViewModel>();
-    
-    // Я хз что это, но без этого не работает
-    if (!viewModel.isLoading && viewModel.nextRoute != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, viewModel.nextRoute!);
-      });
-    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              flex: 7,
+              flex: 15,
               child: Center(
                 child: SvgPicture.asset(
-                  model.logo,
+                  "assets/images/Logo.svg",
                   width: isTable ? 220 : 160,
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
-                    colors.black,
+                    widget.colors.black,
                     BlendMode.srcIn,
                   ),
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  viewModel.isLoading
+                  _isLoading
                       ? SpinKitCircle(
-                        color: colors.black,
-                        size: width * 0.09,
+                          color: widget.colors.black,
+                          size: width * 0.09,
                         )
                       : Text(""),
                   Text(
-                    model.title,
-                    style: GoogleFonts.acme(
+                    "MuIT",
+                    style: TextStyle(
                       fontSize: isTable ? 110 : 50,
-                      color: colors.black,
+                      color: widget.colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    model.version,
-                    style: GoogleFonts.acme(
-                      fontSize: isTable ? 30 : 15,
-                      color: colors.black,
+                    "Version 0.1",
+                    style: TextStyle(
+                      fontSize: isTable ? 30 : 16,
+                      color: widget.colors.black,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
@@ -78,5 +80,14 @@ class SplashView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> isLoading() async {
+    await Future.delayed(Duration(seconds: 3));
+    _isLoading = false;
+
+    if (_isLoading == false) {
+      Navigator.pushNamed(context, '/registration');
+    }
   }
 }

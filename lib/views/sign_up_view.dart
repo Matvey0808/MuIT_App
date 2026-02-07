@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:serviceapp/data/colors_data.dart';
-import 'package:serviceapp/data/sign_up_data.dart';
 import 'package:serviceapp/models/colors_model.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:serviceapp/models/registration_model.dart';
-import 'package:serviceapp/models/sign_up_models.dart';
 import 'package:serviceapp/widgets/custom_sign_up_widget.dart';
 import 'package:serviceapp/widgets/text_field_widget.dart';
 
 class SignUpView extends StatefulWidget {
   final ColorsApp colors;
-  final SignUpModels signup;
-  final RegistrationModels models;
 
-  const SignUpView({
-    super.key,
-    required this.colors,
-    required this.signup,
-    required this.models,
-  });
+  const SignUpView({super.key, required this.colors});
 
   @override
   State<SignUpView> createState() => _SignUpViewState();
@@ -41,36 +30,28 @@ class _SignUpViewState extends State<SignUpView> {
             Padding(
               padding: EdgeInsets.only(right: width * 0.35),
               child: Text(
-                widget.signup.title1,
-                style: GoogleFonts.acme(
+                "Create Your\nAccount",
+                style: TextStyle(
                   fontSize: isTable ? width * 0.2 : width * 0.1,
                   color: widget.colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(height: height * 0.05),
             Padding(
               padding: EdgeInsets.only(left: width * 0.08, right: width * 0.08),
-              child: TextFieldWidgetName(
-                colors: ColorApp,
-                textField: SignUpModel,
-              ),
+              child: TextFieldWidgetName(colors: ColorApp),
             ),
             SizedBox(height: height * 0.03),
             Padding(
               padding: EdgeInsets.only(left: width * 0.08, right: width * 0.08),
-              child: TextFieldWidgetEmail(
-                colors: ColorApp,
-                textField: SignUpModel,
-              ),
+              child: TextFieldWidgetEmail(colors: ColorApp),
             ),
             SizedBox(height: height * 0.03),
             Padding(
               padding: EdgeInsets.only(left: width * 0.08, right: width * 0.08),
-              child: TextFieldWidgetPassword(
-                colors: ColorApp,
-                textField: SignUpModel,
-              ),
+              child: TextFieldWidgetPassword(colors: ColorApp),
             ),
             SizedBox(height: height * 0.04),
             ElevatedButton(
@@ -87,8 +68,8 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
               ),
               child: Text(
-                widget.signup.buttonRegister,
-                style: GoogleFonts.acme(
+                "Register",
+                style: TextStyle(
                   fontSize: isTable ? width * 0.08 : width * 0.04,
                   color: widget.colors.white0xFFE3E3E3,
                 ),
@@ -99,21 +80,22 @@ class _SignUpViewState extends State<SignUpView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.signup.title2,
-                  style: GoogleFonts.acme(
+                  "Already Have An Account?",
+                  style: TextStyle(
                     fontSize: isTable ? width * 0.08 : width * 0.04,
                     color: widget.colors.black26,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(width: width * 0.01),
                 GestureDetector(
                   onTap: () {},
                   child: Text(
-                    widget.signup.buttonSignIn,
-                    style: GoogleFonts.acme(
+                    "Sign In",
+                    style: TextStyle(
                       fontSize: isTable ? width * 0.8 : width * 0.04,
                       color: widget.colors.black0xFF141718,
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -123,10 +105,11 @@ class _SignUpViewState extends State<SignUpView> {
             CustomSignUpWidget(colors: ColorApp),
             SizedBox(height: height * 0.015),
             Text(
-              widget.signup.title3,
-              style: GoogleFonts.acme(
+              "Continue Witn Account",
+              style: TextStyle(
                 fontSize: isTable ? width * 0.9 : width * 0.045,
                 color: widget.colors.black26,
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: height * 0.02),
@@ -144,7 +127,7 @@ class _SignUpViewState extends State<SignUpView> {
                 elevation: 0,
               ),
               child: Text(
-                widget.models.buttonGoogle,
+                "Google",
                 style: TextStyle(
                   fontSize: height * 0.017,
                   color: Color(0xFFD44638),

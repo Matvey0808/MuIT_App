@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:serviceapp/data/colors_data.dart';
-import 'package:serviceapp/data/sign_up_data.dart';
 import 'package:serviceapp/models/colors_model.dart';
-import 'package:serviceapp/models/registration_model.dart';
-import 'package:serviceapp/models/sign_in_model.dart';
 import 'package:serviceapp/widgets/custom_sign_up_widget.dart';
 import 'package:serviceapp/widgets/text_field_widget.dart';
 
 class SignInView extends StatefulWidget {
   final ColorsApp colors;
-  final SignInModel signin;
-  final RegistrationModels model;
 
-  const SignInView({
-    super.key,
-    required this.colors,
-    required this.signin,
-    required this.model,
-  });
+  const SignInView({super.key, required this.colors});
 
   @override
   State<SignInView> createState() => _SignInViewState();
@@ -37,32 +26,27 @@ class _SignInViewState extends State<SignInView> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: height * 0.15),
+            SizedBox(height: height * 0.2),
             Padding(
               padding: EdgeInsets.only(right: width * 0.35),
               child: Text(
-                widget.signin.title1,
-                style: GoogleFonts.acme(
+                "Login Your\nAccount",
+                style: TextStyle(
                   fontSize: isTable ? width * 0.2 : width * 0.1,
                   color: widget.colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             SizedBox(height: height * 0.05),
             Padding(
               padding: EdgeInsets.only(left: width * 0.08, right: width * 0.08),
-              child: TextFieldWidgetEmail(
-                colors: ColorApp,
-                textField: SignUpModel,
-              ),
+              child: TextFieldWidgetEmail(colors: ColorApp),
             ),
             SizedBox(height: height * 0.03),
             Padding(
               padding: EdgeInsets.only(left: width * 0.08, right: width * 0.08),
-              child: TextFieldWidgetPassword(
-                colors: ColorApp,
-                textField: SignUpModel,
-              ),
+              child: TextFieldWidgetPassword(colors: ColorApp),
             ),
             SizedBox(height: height * 0.015),
             Padding(
@@ -71,9 +55,10 @@ class _SignInViewState extends State<SignInView> {
                 onTap: () {},
                 child: Text(
                   "Forget Password?",
-                  style: GoogleFonts.acme(
+                  style: TextStyle(
                     fontSize: 15,
                     color: widget.colors.black0xFF141718,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -93,8 +78,8 @@ class _SignInViewState extends State<SignInView> {
                 ),
               ),
               child: Text(
-                widget.signin.buttonLogin,
-                style: GoogleFonts.acme(
+                "Login",
+                style: TextStyle(
                   fontSize: isTable ? width * 0.08 : width * 0.04,
                   color: widget.colors.white0xFFE3E3E3,
                 ),
@@ -105,19 +90,21 @@ class _SignInViewState extends State<SignInView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.signin.title2,
-                  style: GoogleFonts.acme(
+                  "Create New Account?",
+                  style: TextStyle(
                     fontSize: isTable ? 0.08 : width * 0.04,
                     color: widget.colors.black26,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(width: width * 0.01),
                 GestureDetector(
                   onTap: () {},
                   child: Text(
-                    widget.signin.buttonSignUp,
-                    style: GoogleFonts.acme(
+                    "Sign Up",
+                    style: TextStyle(
                       fontSize: isTable ? width * 0.8 : width * 0.04,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -127,10 +114,11 @@ class _SignInViewState extends State<SignInView> {
             CustomSignUpWidget(colors: ColorApp),
             SizedBox(height: height * 0.015),
             Text(
-              widget.signin.title3,
-              style: GoogleFonts.acme(
+              "Continue With Accounts",
+              style: TextStyle(
                 fontSize: isTable ? width * 0.9 : width * 0.045,
                 color: widget.colors.black26,
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: height * 0.02),
@@ -148,7 +136,7 @@ class _SignInViewState extends State<SignInView> {
                 ),
               ),
               child: Text(
-                widget.model.buttonGoogle,
+                "Google",
                 style: TextStyle(
                   fontSize: height * 0.017,
                   color: Color(0xFFD44638),
