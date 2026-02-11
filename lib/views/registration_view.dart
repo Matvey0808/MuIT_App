@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:serviceapp/models/colors_model.dart';
+import 'package:serviceapp/widgets/custom_sign_up_widget.dart';
 
 class RegistrationView extends StatelessWidget {
   final ColorsApp colors;
@@ -13,104 +14,111 @@ class RegistrationView extends StatelessWidget {
     final height = size.height;
     final width = size.width;
 
-    final isTable = width >= 600;
-
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: height * 0.16),
-            Center(
-              child: SvgPicture.asset(
-                "assets/images/Logo.svg",
-                width: isTable ? width * 0.7 : width * 0.4,
-                colorFilter: ColorFilter.mode(colors.black, BlendMode.srcIn),
-              ),
-            ),
-            SizedBox(height: height * 0.03),
-            Expanded(
-              child: Column(
-                children: [
-                  Text(
-                    "Welcome to MuIT",
-                    style: TextStyle(
-                      fontSize: isTable ? width * 0.2 : width * 0.1,
-                      color: colors.black,
-                      fontWeight: FontWeight.w600,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Column(
+              children: [
+                SizedBox(height: constraints.maxHeight * 0.16),
+                Center(
+                  child: SvgPicture.asset(
+                    "assets/images/Logo.svg",
+                    width: constraints.maxHeight * 0.2,
+                    colorFilter: ColorFilter.mode(
+                      colors.black,
+                      BlendMode.srcIn,
                     ),
                   ),
-                  SizedBox(height: height * 0.06),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colors.black0xFF141718,
-                      padding: EdgeInsets.symmetric(
-                        vertical: width * 0.05,
-                        horizontal: height * 0.17,
+                ),
+                SizedBox(height: constraints.maxHeight * 0.03),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Welcome to MuIT",
+                        style: TextStyle(
+                          fontSize: constraints.maxHeight * 0.05,
+                          color: colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      elevation: 0,
-                    ),
-                    child: Text(
-                      "Log in",
-                      style: TextStyle(
-                        fontSize: height * 0.018,
-                        color: Colors.white,
+                      SizedBox(height: constraints.maxHeight * 0.07),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colors.black0xFF141718,
+                          padding: EdgeInsets.symmetric(
+                            vertical: constraints.maxWidth * 0.05,
+                            horizontal: constraints.maxHeight * 0.21,
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          "Log in",
+                          style: TextStyle(
+                            fontSize: constraints.maxHeight * 0.02,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(height: constraints.maxHeight * 0.03),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colors.white0xFFE3E3E3,
+                          padding: EdgeInsets.symmetric(
+                            vertical: constraints.maxWidth * 0.05,
+                            horizontal: constraints.maxHeight * 0.2,
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          "Sign up",
+                          style: TextStyle(
+                            fontSize: constraints.maxHeight * 0.02,
+                            color: colors.black26,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: constraints.maxHeight * 0.05),
+                      CustomSignUpWidget(colors: colors),
+                      SizedBox(height: constraints.maxHeight * 0.02),
+                      Text(
+                        "Continue With Accounts",
+                        style: TextStyle(
+                          fontSize: constraints.maxHeight * 0.025,
+                          color: colors.black38,
+                        ),
+                      ),
+                      SizedBox(height: constraints.maxHeight * 0.03),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(65, 212, 69, 56),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxHeight * 0.08,
+                            vertical: constraints.maxWidth * 0.04,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          "Google",
+                          style: TextStyle(
+                            fontSize: constraints.maxWidth * 0.05,
+                            color: Color(0xFFD44638),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: height * 0.03),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colors.white0xFFE3E3E3,
-                      padding: EdgeInsets.symmetric(
-                        vertical: width * 0.05,
-                        horizontal: height * 0.165,
-                      ),
-                      elevation: 0,
-                    ),
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                        fontSize: height * 0.018,
-                        color: colors.black26,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: height * 0.05),
-                  Text(
-                    "Continue With Accounts",
-                    style: TextStyle(
-                      fontSize: height * 0.02,
-                      color: colors.black38,
-                    ),
-                  ),
-                  SizedBox(height: height * 0.03),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(65, 212, 69, 56),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: height * 0.07,
-                        vertical: width * 0.04,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: Text(
-                      "Google",
-                      style: TextStyle(
-                        fontSize: height * 0.02,
-                        color: Color(0xFFD44638),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
