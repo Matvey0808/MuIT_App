@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 class VacancyWidget extends StatelessWidget {
-  const VacancyWidget({super.key, required this.name});
+  const VacancyWidget({
+    super.key,
+    required this.name,
+    required this.pay,
+    required this.city,
+  });
   final String name;
+  final String pay;
+  final String city;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +20,47 @@ class VacancyWidget extends StatelessWidget {
       elevation: 0,
       child: SizedBox(
         height: height * 0.25,
-        child: Text(name),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(name),
+            ),
+            SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text("От $pay"),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 10),
+              child: Text(city),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 10),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  "Откликнуться",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
