@@ -25,17 +25,19 @@ class HomeView extends StatelessWidget {
                     child: SearchWidget(),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: state.length,
-                      itemBuilder: (context, index) {
-                        final object = state[index];
-                        return VacancyWidget(
-                          name: object.name,
-                          pay: object.pay,
-                          city: object.city
-                        );
-                      },
-                    ),
+                    child: state.isEmpty
+                        ? Center(child: Text("Ничего не найдено"))
+                        : ListView.builder(
+                            itemCount: state.length,
+                            itemBuilder: (context, index) {
+                              final object = state[index];
+                              return VacancyWidget(
+                                name: object.name,
+                                pay: object.pay,
+                                city: object.city,
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),
