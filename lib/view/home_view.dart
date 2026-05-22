@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:muit_app/bloc/vacancy_cubit.dart';
 import 'package:muit_app/bloc/vacancy_state.dart';
+import 'package:muit_app/widget/dialog_filtered_widget.dart';
 import 'package:muit_app/widget/search_widget.dart';
 import 'package:muit_app/widget/vacancy_widget.dart';
 
@@ -22,7 +23,22 @@ class HomeView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SearchWidget(),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SearchWidget(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              showDialogFilter(context);
+                            },
+                            child: Icon(Icons.menu, size: 28),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: state.isEmpty
