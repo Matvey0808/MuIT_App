@@ -19,11 +19,11 @@ class DialogFilteredWidget extends StatefulWidget {
 class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
   final Map<String, bool> isActive = {
     "Android": false,
-    "Ios": false,
+    "iOS": false,
     "Web": false,
   };
-  List<String> filtersName = ["Android", "Ios", "Web"];
-  List<String> emptyList = [];
+  List<String> filtersName = ["Android", "iOS", "Web"];
+  List<String> selectedVacancy = [];
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -39,14 +39,15 @@ class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
                 value: isActive[filters]!,
                 onChanged: (bool? value) {
                   setState(() {
-                    isActive[filters] = value!;
-                    if (!emptyList.contains(filters)) {
-                      print("В списке есть $filters");
-                      emptyList.add(filters);
-                      print(emptyList);
+                    if (value != null) {
+                      isActive[filters] = value;
+                      if (!selectedVacancy.contains(filters)) {
+                        selectedVacancy.add(filters);
+                      } else {
+                        selectedVacancy.remove(filters);
+                      }
                     } else {
-                      emptyList.remove(filters);
-                      print(emptyList);
+                      throw Exception("Ошибка: value == null");
                     }
                   });
                 },
@@ -57,7 +58,10 @@ class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
       ),
       actions: <Widget>[
         Center(
-          child: ElevatedButton(onPressed: () {}, child: Text("Применить")),
+          child: ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Применить")
+          ),
         ),
       ],
     );

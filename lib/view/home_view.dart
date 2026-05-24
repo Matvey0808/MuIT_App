@@ -30,11 +30,11 @@ class HomeView extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: GestureDetector(
-                            onTap: () {
+                          child: IconButton(
+                            onPressed: () {
                               showDialogFilter(context);
                             },
-                            child: Icon(Icons.menu, size: 28),
+                            icon: Icon(Icons.filter_alt_outlined, size: 28),
                           ),
                         ),
                       ],
