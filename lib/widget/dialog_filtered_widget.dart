@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muit_app/bloc/vacancy_cubit.dart';
 
-void showDialogFilter(BuildContext context) {
+void showDialogFilter(BuildContext context, VacancyCubit cubit) {
   showDialog(
     context: context,
     builder: (dialogFilter) {
-      return DialogFilteredWidget();
+      return DialogFilteredWidget(cubit: cubit);
     },
   );
 }
 
-class DialogFilteredWidget extends StatefulWidget {
-  const DialogFilteredWidget({super.key});
+class DialogFilteredWidget extends StatelessWidget {
+  const DialogFilteredWidget({super.key, required this.cubit});
+  final VacancyCubit cubit;
 
-  @override
-  State<DialogFilteredWidget> createState() => _DialogFilteredWidgetState();
-}
+  static List<String> filtersName = ["Android", "iOS", "Web"];
+  static List<String> selectedVacancy = [];
 
-class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
-  final Map<String, bool> isActive = {
-    "Android": false,
-    "iOS": false,
-    "Web": false,
-  };
-  List<String> filtersName = ["Android", "iOS", "Web"];
-  List<String> selectedVacancy = [];
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -32,27 +26,22 @@ class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
         children: [
           Padding(padding: EdgeInsets.only(bottom: 10), child: Text("Фильтры")),
           Divider(height: 0, color: Colors.black),
-          Column(
-            children: filtersName.map((filters) {
-              return CheckboxListTile(
-                title: Text(filters),
-                value: isActive[filters]!,
-                onChanged: (bool? value) {
-                  setState(() {
-                    if (value != null) {
-                      isActive[filters] = value;
-                      if (!selectedVacancy.contains(filters)) {
-                        selectedVacancy.add(filters);
-                      } else {
-                        selectedVacancy.remove(filters);
-                      }
-                    } else {
-                      throw Exception("Ошибка: value == null");
-                    }
-                  });
-                },
+          StatefulBuilder(
+            builder: (context, setState) {
+              return Column(
+                children: filtersName.map((filters) {
+                  return CheckboxListTile(
+                    title: Text(filters),
+                    value: selectedVacancy.contains(filters),
+                    onChanged: (bool? value) {
+                      setState(() {
+                        cubit.toggleFilter(filters, selectedVacancy);
+                      });
+                    },
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           ),
         ],
       ),
@@ -60,7 +49,7 @@ class _DialogFilteredWidgetState extends State<DialogFilteredWidget> {
         Center(
           child: ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Применить")
+            child: Text("Применить"),
           ),
         ),
       ],
