@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:muit_app/bloc/vacancy_cubit.dart';
 
 void showDialogFilter(BuildContext context, VacancyCubit cubit) {
@@ -15,8 +14,8 @@ class DialogFilteredWidget extends StatelessWidget {
   const DialogFilteredWidget({super.key, required this.cubit});
   final VacancyCubit cubit;
 
-  static List<String> filtersName = ["Android", "iOS", "Web"];
-  static List<String> selectedVacancy = [];
+  static const List<String> filtersName = ["Android", "iOS", "Web"];
+  static final List<String> selectedVacancy = [];
 
   @override
   Widget build(BuildContext context) {
