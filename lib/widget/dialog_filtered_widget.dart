@@ -15,7 +15,7 @@ class DialogFilteredWidget extends StatelessWidget {
   final VacancyCubit cubit;
 
   static const List<String> filtersName = ["Android", "iOS", "Web"];
-  static final List<String> selectedVacancy = [];
+  static final List selectedVacancy = [];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class DialogFilteredWidget extends StatelessWidget {
                   return CheckboxListTile(
                     title: Text(filters),
                     value: selectedVacancy.contains(filters),
-                    onChanged: (bool? value) {
+                    onChanged: (_) {
                       setState(() {
                         cubit.toggleFilter(filters, selectedVacancy);
                       });
@@ -47,7 +47,12 @@ class DialogFilteredWidget extends StatelessWidget {
       actions: <Widget>[
         Center(
           child: ElevatedButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              cubit.applyFilter(
+                selectedVacancy
+              );
+              Navigator.pop(context);
+            },
             child: Text("Применить"),
           ),
         ),
