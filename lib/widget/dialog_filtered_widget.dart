@@ -2,12 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:muit_app/bloc/vacancy_cubit.dart';
 
 void showDialogFilter(BuildContext context, VacancyCubit cubit) {
+  final List<String> savedFiltersList = List<String>.from(cubit.selectedVacancy);
   showDialog(
     context: context,
     builder: (dialogFilter) {
       return DialogFilteredWidget(cubit: cubit);
     },
-  );
+  ).then((value) {
+    if (value == null || value == false) {
+      final copyFiltersList = List<String>.from(cubit.selectedVacancy);
+
+      for (var filters in copyFiltersList) {
+        if (cubit.selectedVacancy.contains(filters)) {
+          cubit.toggleFilter(filters);
+        }
+      }
+
+      for (var filters in savedFiltersList) {
+        if (!cubit.selectedVacancy.contains(filters)) {
+          cubit.toggleFilter(filters);
+          cubit.applyFilter();
+        }
+      }
+    }
+  });
 }
 
 class DialogFilteredWidget extends StatelessWidget {
@@ -15,8 +33,6 @@ class DialogFilteredWidget extends StatelessWidget {
   final VacancyCubit cubit;
 
   static const List<String> filtersName = ["Android", "iOS", "Web"];
-  static final List selectedVacancy = [];
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -31,10 +47,10 @@ class DialogFilteredWidget extends StatelessWidget {
                 children: filtersName.map((filters) {
                   return CheckboxListTile(
                     title: Text(filters),
-                    value: selectedVacancy.contains(filters),
-                    onChanged: (_) {
+                    value: cubit.selectedVacancy.contains(filters),
+                    onChanged: (bool? value) {
                       setState(() {
-                        cubit.toggleFilter(filters, selectedVacancy);
+                        cubit.toggleFilter(filters);
                       });
                     },
                   );
@@ -48,10 +64,8 @@ class DialogFilteredWidget extends StatelessWidget {
         Center(
           child: ElevatedButton(
             onPressed: () {
-              cubit.applyFilter(
-                selectedVacancy
-              );
-              Navigator.pop(context);
+              cubit.applyFilter();
+              Navigator.pop(context, true);
             },
             child: Text("Применить"),
           ),

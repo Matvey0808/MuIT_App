@@ -7,6 +7,9 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
     VacancyState(name: "IOS Developer", pay: "110 000", city: "Москва"),
     VacancyState(name: "ML Engineer", pay: "130 000", city: "Москва"),
   ];
+  final Set<String> _selectedVacancy = <String>{};
+
+  Set<String> get selectedVacancy => _selectedVacancy;
 
   VacancyCubit() : super([...allVacancy]);
 
@@ -20,18 +23,17 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
     emit([...searchVacancy]);
   }
 
-  void toggleFilter(String filtersName, List selectedVacancy) {
-    if (!selectedVacancy.contains(filtersName)) {
-      selectedVacancy.add(filtersName);
+  void toggleFilter(String filtersName) {
+    if (!_selectedVacancy.contains(filtersName)) {
+      _selectedVacancy.add(filtersName);
     } else {
-      selectedVacancy.remove(filtersName);
+      _selectedVacancy.remove(filtersName);
     }
-
     emit(state);
   }
 
-  void applyFilter(List selectedVacancy) {
-    if (selectedVacancy.isEmpty) {
+  void applyFilter() {
+    if (_selectedVacancy.isEmpty) {
       emit(List.from(allVacancy));
       return;
     }
@@ -39,7 +41,7 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
     final filtered = allVacancy.where((vacancy) {
       final nameLower = vacancy.name.toLowerCase();
 
-      return selectedVacancy.any((filter) {
+      return _selectedVacancy.any((filter) {
       return nameLower.contains(filter.toLowerCase());
       });
     }).toList();
