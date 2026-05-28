@@ -1,28 +1,50 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:muit_app/bloc/vacancy_state.dart';
 
 class VacancyCubit extends Cubit<List<VacancyState>> {
-  VacancyCubit() : super([
-    VacancyState(name: "Android Developer", pay: "90 000", city: "Барнаул"),
-    VacancyState(name: "IOS Developer", pay: "110 000", city: "Москва"),
-    VacancyState(name: "ML Engineer", pay: "130 000", city: "Москва"),
-  ]);
-
-  List<VacancyState> allVacancy = [
+  static final List<VacancyState> allVacancy = [
     VacancyState(name: "Android Developer", pay: "90 000", city: "Барнаул"),
     VacancyState(name: "IOS Developer", pay: "110 000", city: "Москва"),
     VacancyState(name: "ML Engineer", pay: "130 000", city: "Москва"),
   ];
+  final Set<String> _selectedVacancy = <String>{};
 
-  void search(TextEditingController controllerSearch) {
-    List filteredVacancy = [];
+  Set<String> get selectedVacancy => _selectedVacancy;
 
-    filteredVacancy = allVacancy.where((vacancy) {
+  VacancyCubit() : super([...allVacancy]);
+
+  void search(String searchTitle) {
+    List searchVacancy = [];
+    searchVacancy = allVacancy.where((vacancy) {
       final nameLower = vacancy.name.toLowerCase();
-      return nameLower.contains(controllerSearch.text.toLowerCase());
+      return nameLower.contains(searchTitle.toLowerCase());
     }).toList();
 
-    emit([...filteredVacancy]);
+    emit([...searchVacancy]);
+  }
+
+  void toggleFilter(String filtersName) {
+    if (!_selectedVacancy.contains(filtersName)) {
+      _selectedVacancy.add(filtersName);
+    } else {
+      _selectedVacancy.remove(filtersName);
+    }
+    emit(state);
+  }
+
+  void applyFilter() {
+    if (_selectedVacancy.isEmpty) {
+      emit(List.from(allVacancy));
+      return;
+    }
+    
+    final filtered = allVacancy.where((vacancy) {
+      final nameLower = vacancy.name.toLowerCase();
+
+      return _selectedVacancy.any((filter) {
+      return nameLower.contains(filter.toLowerCase());
+      });
+    }).toList();
+    emit(filtered);
   }
 }

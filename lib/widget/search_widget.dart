@@ -24,7 +24,7 @@ class SearchWidget extends StatelessWidget {
         enabledBorder: focusedAndEnableBorderTF
       ),
       onChanged: (value) {
-        context.read<VacancyCubit>().search(controllerSearch);
+        context.read<VacancyCubit>().search(controllerSearch.text);
       },
     );
   }

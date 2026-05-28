@@ -15,51 +15,56 @@ class HomeView extends StatelessWidget {
       create: (context) {
         return VacancyCubit();
       },
-      child: Scaffold(
-        body: BlocBuilder<VacancyCubit, List<VacancyState>>(
-          builder: (context, state) {
-            return SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: SearchWidget(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: BlocBuilder<VacancyCubit, List<VacancyState>>(
+              builder: (context, state) {
+                return SafeArea(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: SearchWidget(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: IconButton(
+                                onPressed: () {
+                                  final cubit = context.read<VacancyCubit>();
+                                  showDialogFilter(context, cubit);
+                                },
+                                icon: Icon(Icons.filter_alt_outlined, size: 28),
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: IconButton(
-                            onPressed: () {
-                              showDialogFilter(context);
-                            },
-                            icon: Icon(Icons.filter_alt_outlined, size: 28),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: state.isEmpty
+                            ? Center(child: Text("Ничего не найдено"))
+                            : ListView.builder(
+                                itemCount: state.length,
+                                itemBuilder: (context, index) {
+                                  final object = state[index];
+                                  return VacancyWidget(
+                                    name: object.name,
+                                    pay: object.pay,
+                                    city: object.city,
+                                  );
+                                },
+                              ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: state.isEmpty
-                        ? Center(child: Text("Ничего не найдено"))
-                        : ListView.builder(
-                            itemCount: state.length,
-                            itemBuilder: (context, index) {
-                              final object = state[index];
-                              return VacancyWidget(
-                                name: object.name,
-                                pay: object.pay,
-                                city: object.city,
-                              );
-                            },
-                          ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          );
+        }
       ),
     );
   }
