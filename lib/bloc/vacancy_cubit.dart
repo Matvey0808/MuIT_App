@@ -6,6 +6,7 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
     VacancyState(name: "Android Developer", pay: "90 000", city: "Барнаул"),
     VacancyState(name: "IOS Developer", pay: "110 000", city: "Москва"),
     VacancyState(name: "ML Engineer", pay: "130 000", city: "Москва"),
+    VacancyState(name: "Frontend JS", pay: "70 000", city: "Казань"),
   ];
   final Set<String> _selectedVacancy = <String>{};
 
