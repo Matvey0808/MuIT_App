@@ -11,7 +11,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return BlocProvider(
       create: (context) {
         return VacancyCubit();
@@ -63,28 +62,6 @@ class HomeView extends StatelessWidget {
                   ),
                 );
               },
-            ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: Container(
-              height: 60,
-              width: width * 0.5,
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(16)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.settings, size: 30)
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.chrome_reader_mode, size: 30)
-                  )  
-                ],
-              ),
             ),
           );
         }
