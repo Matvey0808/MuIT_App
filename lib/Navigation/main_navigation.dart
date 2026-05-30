@@ -10,53 +10,53 @@ class MainNavigationView extends StatefulWidget {
 }
 
 class _MainNavigationViewState extends State<MainNavigationView> {
-  int _cur = 0;
+  int cur = 0;
   @override
   Widget build(BuildContext context) {
     final iconNavBar = [
-      Icon(Icons.settings, size: 32),
-      Icon(Icons.chrome_reader_mode, size: 32),
-      Icon(Icons.person, size: 32)
+      Icons.settings,
+      Icons.chrome_reader_mode,
+      Icons.person
     ];
 
-    final view = [
-      SettingsView(),
-      HomeView(),
-    ];
+    final view = [SettingsView(), HomeView()];
+
     return Scaffold(
-        body: Stack(
-          children: [
-            IndexedStack(
-              index: _cur,
-              children: view
-            ),
-            Positioned(
-              left: 68,
-              right: 68,
-              bottom: 30,
-              top: 800,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(24)
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(iconNavBar.length, (index) {
-                    return IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _cur = index;
-                        });
-                      },
-                      icon: iconNavBar[index],
-                    );
-                  }),
-                ),
+      body: Stack(
+        children: [
+          IndexedStack(index: cur, children: view),
+          Positioned(
+            left: 68,
+            right: 68,
+            bottom: 30,
+            top: 800,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(24),
               ),
-            )
-          ],
-        ),
-      );
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(iconNavBar.length, (index) {
+                  final selected = index == cur;
+                  return IconButton(
+                    onPressed: () {
+                      setState(() {
+                        cur = index;
+                      });
+                    },
+                    icon: Icon(
+                      iconNavBar[index],
+                      size: 32,
+                      color: selected ? Colors.black45 : Colors.black26,
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
