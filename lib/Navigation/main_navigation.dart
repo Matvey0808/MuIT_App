@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:muit_app/view/home_view.dart';
 import 'package:muit_app/view/profile_view.dart';
@@ -12,13 +14,10 @@ class MainNavigationView extends StatefulWidget {
 
 class _MainNavigationViewState extends State<MainNavigationView> {
   int cur = 0;
+
   @override
   Widget build(BuildContext context) {
-    final iconNavBar = [
-      Icons.settings,
-      Icons.chrome_reader_mode,
-      Icons.person
-    ];
+    final iconNavBar = [Icons.settings, Icons.chrome_reader_mode, Icons.person];
 
     final view = [SettingsView(), HomeView(), ProfileView()];
 
@@ -27,8 +26,8 @@ class _MainNavigationViewState extends State<MainNavigationView> {
         children: [
           IndexedStack(index: cur, children: view),
           Positioned(
-            left: 68,
-            right: 68,
+            left: 98,
+            right: 98,
             bottom: 30,
             child: Container(
               height: 60,
@@ -40,16 +39,26 @@ class _MainNavigationViewState extends State<MainNavigationView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(iconNavBar.length, (index) {
                   final selected = index == cur;
-                  return IconButton(
-                    onPressed: () {
-                      setState(() {
-                        cur = index;
-                      });
-                    },
-                    icon: Icon(
-                      iconNavBar[index],
-                      size: 32,
-                      color: selected ? Colors.black54 : Colors.black26,
+                  return AnimatedSlide(
+                    offset: selected ? Offset(0, -0.1) : Offset(0, 0),
+                    duration: const Duration(milliseconds: 130),
+                    child: AnimatedScale(
+                      scale: selected ? 1.5 : 1.3,
+                      duration: const Duration(milliseconds: 130),
+                      child: IconButton(
+                      style: IconButton.styleFrom(
+                        highlightColor: Colors.transparent,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          cur = index;
+                        });
+                      },
+                      icon: Icon(
+                        iconNavBar[index],
+                        color: selected ? Colors.black54 : Colors.black26,
+                      ),
+                    ),
                     ),
                   );
                 }),
