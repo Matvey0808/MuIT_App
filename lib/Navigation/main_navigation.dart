@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muit_app/view/home_view.dart';
+import 'package:muit_app/view/profile_view.dart';
 import 'package:muit_app/view/settings_view.dart';
 
 class MainNavigationView extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
       Icons.person
     ];
 
-    final view = [SettingsView(), HomeView()];
+    final view = [SettingsView(), HomeView(), ProfileView()];
 
     return Scaffold(
       body: Stack(
@@ -29,8 +30,8 @@ class _MainNavigationViewState extends State<MainNavigationView> {
             left: 68,
             right: 68,
             bottom: 30,
-            top: 800,
             child: Container(
+              height: 60,
               decoration: BoxDecoration(
                 color: Colors.black26,
                 borderRadius: BorderRadius.circular(24),
@@ -48,7 +49,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
                     icon: Icon(
                       iconNavBar[index],
                       size: 32,
-                      color: selected ? Colors.black45 : Colors.black26,
+                      color: selected ? Colors.black54 : Colors.black26,
                     ),
                   );
                 }),
