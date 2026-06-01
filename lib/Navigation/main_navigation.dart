@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:muit_app/view/home_view.dart';
 import 'package:muit_app/view/profile_view.dart';
@@ -13,18 +11,38 @@ class MainNavigationView extends StatefulWidget {
 }
 
 class _MainNavigationViewState extends State<MainNavigationView> {
-  int cur = 0;
+  int cur = 1;
 
   @override
   Widget build(BuildContext context) {
     final iconNavBar = [Icons.settings, Icons.chrome_reader_mode, Icons.person];
 
-    final view = [SettingsView(), HomeView(), ProfileView()];
+    final view = [
+      SettingsView(key: ValueKey(cur)),
+      HomeView(key: ValueKey(cur)),
+      ProfileView(key: ValueKey(cur)),
+    ];
+
+    final animNavView = view.map((anim) {
+      return AnimatedSwitcher(
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        duration: const Duration(milliseconds: 500),
+        transitionBuilder: (child, animation) => SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, -4),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+          child: FadeTransition(opacity: animation, child: child),
+        ),
+        child: view[cur],
+      );
+    }).toList();
 
     return Scaffold(
       body: Stack(
         children: [
-          IndexedStack(index: cur, children: view),
+          IndexedStack(index: cur, children: animNavView),
           Positioned(
             left: 98,
             right: 98,
@@ -46,19 +64,19 @@ class _MainNavigationViewState extends State<MainNavigationView> {
                       scale: selected ? 1.5 : 1.3,
                       duration: const Duration(milliseconds: 130),
                       child: IconButton(
-                      style: IconButton.styleFrom(
-                        highlightColor: Colors.transparent,
+                        style: IconButton.styleFrom(
+                          highlightColor: Colors.transparent,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            cur = index;
+                          });
+                        },
+                        icon: Icon(
+                          iconNavBar[index],
+                          color: selected ? Colors.black54 : Colors.black26,
+                        ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          cur = index;
-                        });
-                      },
-                      icon: Icon(
-                        iconNavBar[index],
-                        color: selected ? Colors.black54 : Colors.black26,
-                      ),
-                    ),
                     ),
                   );
                 }),
