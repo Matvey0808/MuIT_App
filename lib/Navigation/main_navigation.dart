@@ -126,6 +126,7 @@ class _FadeSlideTransitionState extends State<FadeSlideTransition>
   @override
   void didUpdateWidget(covariant FadeSlideTransition oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.visible == widget.visible) return;
     if (widget.visible) {
       _controller.forward(from: 0.5);
     } else {
