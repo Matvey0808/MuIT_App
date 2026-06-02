@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:muit_app/bloc/vacancy_cubit.dart';
 
 void showDialogFilter(BuildContext context, VacancyCubit cubit) {
-  final List<String> savedFiltersList = List<String>.from(cubit.selectedVacancy);
+  final List<String> savedFiltersList = List<String>.from(
+    cubit.selectedVacancy,
+  );
   showDialog(
     context: context,
     builder: (dialogFilter) {
@@ -22,6 +24,15 @@ void showDialogFilter(BuildContext context, VacancyCubit cubit) {
         if (!cubit.selectedVacancy.contains(filters)) {
           cubit.toggleFilter(filters);
           cubit.applyFilter();
+        }
+      }
+
+      if (value == false) {
+        for (var resetFilters in savedFiltersList) {
+          if (cubit.selectedVacancy.contains(resetFilters)) {
+            cubit.resetFilter();
+            cubit.toggleFilter(resetFilters);
+          }
         }
       }
     }
@@ -61,14 +72,19 @@ class DialogFilteredWidget extends StatelessWidget {
         ],
       ),
       actions: <Widget>[
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              cubit.applyFilter();
-              Navigator.pop(context, true);
-            },
-            child: Text("Применить"),
-          ),
+        ElevatedButton(
+          onPressed: () {
+            cubit.applyFilter();
+            Navigator.pop(context, false);
+          },
+          child: Text("Сбросить"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            cubit.applyFilter();
+            Navigator.pop(context, true);
+          },
+          child: Text("Применить"),
         ),
       ],
     );
