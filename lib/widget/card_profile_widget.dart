@@ -100,3 +100,35 @@ class StatusCard extends StatelessWidget {
     );
   }
 }
+
+class ContactCard extends StatelessWidget {
+  const ContactCard({super.key, required this.number, required this.connection, required this.iconConnection});
+  
+  final String number;
+  final String connection;
+  final Icon iconConnection;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      width: 180,
+      decoration: BoxDecoration(
+        color: Colors.black12,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 5),
+            child: Icon(Icons.phone, size: 34),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text("Телефон\n+7 923 923 12 34"),
+          ),
+        ],
+      ),
+    );
+  }
+}
