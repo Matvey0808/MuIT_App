@@ -8,6 +8,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final experienceText = (experience != null) ? experience : "Не указан";
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -75,7 +77,7 @@ class ProfileView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10, top: 10),
               child: Text(
-                "Опыт работы: $experience",
+                "Опыт работы: $experienceText",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
