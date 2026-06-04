@@ -102,17 +102,16 @@ class StatusCard extends StatelessWidget {
 }
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({super.key, required this.number, required this.connection, required this.iconConnection});
+  const ContactCard({super.key, required this.userConnection, required this.connection, required this.iconConnection});
   
-  final String number;
+  final String userConnection;
   final String connection;
   final Icon iconConnection;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      width: 180,
+      padding: const EdgeInsets.only(left: 5, right: 15),
       decoration: BoxDecoration(
         color: Colors.black12,
         borderRadius: BorderRadius.circular(16),
@@ -121,11 +120,11 @@ class ContactCard extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(left: 5),
-            child: Icon(Icons.phone, size: 34),
+            child: iconConnection,
           ),
           Padding(
             padding: EdgeInsets.only(left: 10),
-            child: Text("Телефон\n+7 923 923 12 34"),
+            child: Text("$connection\n$userConnection"),
           ),
         ],
       ),

@@ -14,7 +14,6 @@ class ProfileView extends StatelessWidget {
           centerTitle: true,
         ),
         body: ListView(
-          scrollDirection: Axis.vertical,
           children: [
             Padding(
               padding: const EdgeInsets.all(6.0),
@@ -24,41 +23,55 @@ class ProfileView extends StatelessWidget {
               padding: EdgeInsets.only(left: 10, top: 10),
               child: Text(
                 "Статус работы",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(6.0),
-              child: StatusCard(status: "Активно ищу", city: "Казань", target: "Поиск работы"),
+              child: StatusCard(
+                status: "Активно ищу",
+                city: "Казань",
+                target: "Поиск работы",
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, top: 10),
+              child: Text(
+                "Контакты",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: SizedBox(
                 width: 60,
                 height: 60,
-                child: ListView.builder(
+                child: ListView(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        ContactCard(
-                          number: "+7 923 912 76 12",
-                          connection: "Телефон",
-                          iconConnection: Icon(Icons.phone)
-                        ),
-                        SizedBox(width: 10)
-                      ],
-                    );
-                  },
-                )
-              )
+                  children: [
+                    ContactCard(
+                      userConnection: "+7 923 912 76 12",
+                      connection: "Телефон",
+                      iconConnection: Icon(Icons.phone, size: 34),
+                    ),
+                    SizedBox(width: 10),
+                    ContactCard(
+                      userConnection: "mgavr26@gmail.com",
+                      connection: "Почта",
+                      iconConnection: Icon(Icons.email, size: 34),
+                    ),
+                    SizedBox(width: 10),
+                    ContactCard(
+                      userConnection: "@mutablevariable",
+                      connection: "Telegram",
+                      iconConnection: Icon(Icons.telegram, size: 34),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
-        )
+        ),
       ),
     );
   }
