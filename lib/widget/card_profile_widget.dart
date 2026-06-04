@@ -102,8 +102,13 @@ class StatusCard extends StatelessWidget {
 }
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({super.key, required this.userConnection, required this.connection, required this.iconConnection});
-  
+  const ContactCard({
+    super.key,
+    required this.userConnection,
+    required this.connection,
+    required this.iconConnection,
+  });
+
   final String userConnection;
   final String connection;
   final Icon iconConnection;
@@ -118,13 +123,89 @@ class ContactCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 5),
-            child: iconConnection,
-          ),
+          Padding(padding: EdgeInsets.only(left: 5), child: iconConnection),
           Padding(
             padding: EdgeInsets.only(left: 10),
             child: Text("$connection\n$userConnection"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ExperienceCard extends StatelessWidget {
+  const ExperienceCard({
+    super.key,
+    this.company,
+    this.experience,
+    this.work,
+    this.period,
+  });
+
+  final String? company;
+  final String? experience;
+  final String? work;
+  final String? period;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.black12,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+            ),
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: CircleAvatar(backgroundColor: Colors.white),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Компания: $company\n$experience"),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 24),
+                      child: CircleAvatar(
+                        radius: 6,
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 24),
+                    child: Text("$work\n$period"),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text("Описание: Отсутствует"),
+                )
+              )
+            ],
           ),
         ],
       ),

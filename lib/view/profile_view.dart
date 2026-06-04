@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:muit_app/widget/card_profile_widget.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  const ProfileView({super.key, this.experience});
+
+  final String? experience;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,22 @@ class ProfileView extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, top: 10),
+              child: Text(
+                "Опыт работы: $experience",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: ExperienceCard(
+                company: "YADRO",
+                experience: "2 года",
+                work: "DevOps",
+                period: "Июль 2023 - август 2025",
               ),
             ),
           ],
