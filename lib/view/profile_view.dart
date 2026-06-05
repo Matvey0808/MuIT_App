@@ -32,11 +32,7 @@ class ProfileView extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(6.0),
-              child: StatusCard(
-                status: "Активно ищу",
-                city: "Казань",
-                target: "Поиск работы",
-              ),
+              child: StatusCard(),
             ),
             Padding(
               padding: EdgeInsets.only(left: 10, top: 10),
@@ -84,7 +80,6 @@ class ProfileView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(6.0),
               child: ExperienceCard(
-                company: "YADRO",
                 experience: "2 года",
                 work: "DevOps",
                 period: "Июль 2023 - август 2025",
