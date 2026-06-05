@@ -120,6 +120,7 @@ class ContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 60,
       padding: const EdgeInsets.only(left: 5, right: 15),
       decoration: BoxDecoration(
         color: Colors.black12,
