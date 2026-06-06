@@ -1,59 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muit_app/bloc/profile_cubit.dart';
+import 'package:muit_app/model/profile_model.dart';
 
 class InfoProfileCard extends StatelessWidget {
-  const InfoProfileCard({super.key, required this.name});
-
-  final String name;
+  const InfoProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 140,
-      decoration: BoxDecoration(
-        color: Colors.black12,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Stack(
-        children: [
-          Align(
-              alignment: Alignment.topRight,
-              child: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-            ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16)
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Text(
-                    name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
+    return BlocBuilder<ProfileCubit, Profile>(
+      builder: (context, state) {
+        return Container(
+          height: 140,
+          decoration: BoxDecoration(
+            color: Colors.black12,
+            borderRadius: BorderRadius.circular(16),
           ),
-        ],
-      ),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "${state.name}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
 
 class StatusCard extends StatelessWidget {
-  const StatusCard({
-    super.key,
-    this.status,
-    this.city,
-    this.target,
-  });
+  const StatusCard({super.key, this.status, this.city, this.target});
 
   final String? status;
   final String? city;
@@ -151,7 +154,7 @@ class ExperienceCard extends StatelessWidget {
     this.experience,
     this.work,
     this.period,
-    this.description
+    this.description,
   });
 
   final String? company;
@@ -221,8 +224,8 @@ class ExperienceCard extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: Text("Описание: $descriptionText"),
-                )
-              )
+                ),
+              ),
             ],
           ),
         ],
