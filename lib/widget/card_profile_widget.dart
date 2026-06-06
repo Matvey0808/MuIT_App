@@ -15,17 +15,22 @@ class InfoProfileCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Positioned(
-            child: Align(
+          Align(
               alignment: Alignment.topRight,
               child: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
             ),
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Card(elevation: 0, child: SizedBox(width: 70, height: 70)),
+                Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: Text(
