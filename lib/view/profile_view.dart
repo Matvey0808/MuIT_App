@@ -57,7 +57,7 @@ class _ProfileViewState extends State<ProfileView> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: InfoProfileCard(),
+                              child: InfoProfileCard(profile: state),
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
@@ -94,7 +94,7 @@ class _ProfileViewState extends State<ProfileView> {
                               child: SizedBox(
                                 height: 60,
                                 child: ListView.builder(
-                                  itemCount: 3,
+                                  itemCount: 4,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
                                     final contacts = [
@@ -120,6 +120,22 @@ class _ProfileViewState extends State<ProfileView> {
                                         iconConnection: Icon(
                                           Icons.telegram,
                                           size: 34,
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          width: 60,
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black12,
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Icon(Icons.add, size: 28),
+                                          ),
                                         ),
                                       ),
                                     ];
