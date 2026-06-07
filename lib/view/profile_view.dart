@@ -41,7 +41,6 @@ class _ProfileViewState extends State<ProfileView> {
     super.dispose();
     _scrollController.removeListener(scroll);
     _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -105,37 +104,39 @@ class _ProfileViewState extends State<ProfileView> {
                               child: SizedBox(
                                 height: 60,
                                 child: ListView.builder(
-                                  itemCount: 1,
+                                  itemCount: 3,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
+                                    final contacts = [
+                                      ContactCard(
+                                        userConnection: "+7 923 912 76 12",
+                                        connection: "Телефон",
+                                        iconConnection: Icon(
+                                          Icons.phone,
+                                          size: 34,
+                                        ),
+                                      ),
+                                      ContactCard(
+                                        userConnection: "mgavr26@gmail.com",
+                                        connection: "Почта",
+                                        iconConnection: Icon(
+                                          Icons.email,
+                                          size: 34,
+                                        ),
+                                      ),
+                                      ContactCard(
+                                        userConnection: "@mutablevariable",
+                                        connection: "Telegram",
+                                        iconConnection: Icon(
+                                          Icons.telegram,
+                                          size: 34,
+                                        ),
+                                      ),
+                                    ];
                                     return Row(
                                       children: [
-                                        ContactCard(
-                                          userConnection: "+7 923 912 76 12",
-                                          connection: "Телефон",
-                                          iconConnection: Icon(
-                                            Icons.phone,
-                                            size: 34,
-                                          ),
-                                        ),
+                                        contacts[index],
                                         SizedBox(width: 10),
-                                        ContactCard(
-                                          userConnection: "mgavr26@gmail.com",
-                                          connection: "Почта",
-                                          iconConnection: Icon(
-                                            Icons.email,
-                                            size: 34,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        ContactCard(
-                                          userConnection: "@mutablevariable",
-                                          connection: "Telegram",
-                                          iconConnection: Icon(
-                                            Icons.telegram,
-                                            size: 34,
-                                          ),
-                                        ),
                                       ],
                                     );
                                   },
