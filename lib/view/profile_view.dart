@@ -15,31 +15,23 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   final ScrollController _scrollController = ScrollController();
-  double appBarOpacity = 0.0;
+  late final ProfileCubit cubit;
+
+  void scroll() {
+    cubit.updateOpacityAppBar(_scrollController.offset);
+  }
 
   @override
   void initState() {
     super.initState();
+    cubit = ProfileCubit();
+
     _scrollController.addListener(scroll);
-  }
-
-  void scroll() {
-    double maxScroll = 100.0;
-
-    double newOpacity = _scrollController.offset / maxScroll;
-    newOpacity = newOpacity.clamp(0.0, 1.0);
-
-    if (newOpacity != appBarOpacity) {
-      setState(() {
-        appBarOpacity = newOpacity;
-      });
-    }
   }
 
   @override
   void dispose() {
     super.dispose();
-    _scrollController.removeListener(scroll);
     _scrollController.dispose();
   }
 
@@ -48,10 +40,8 @@ class _ProfileViewState extends State<ProfileView> {
     final experienceText = (widget.experience != null)
         ? widget.experience
         : "Не указан";
-    return BlocProvider(
-      create: (context) {
-        return ProfileCubit();
-      },
+    return BlocProvider.value(
+      value: cubit,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -164,30 +154,6 @@ class _ProfileViewState extends State<ProfileView> {
                                 period: "Июль 2023 - август 2025",
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: ExperienceCard(
-                                experience: "2 года",
-                                work: "DevOps",
-                                period: "Июль 2023 - август 2025",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: ExperienceCard(
-                                experience: "2 года",
-                                work: "DevOps",
-                                period: "Июль 2023 - август 2025",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: ExperienceCard(
-                                experience: "2 года",
-                                work: "DevOps",
-                                period: "Июль 2023 - август 2025",
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -198,11 +164,13 @@ class _ProfileViewState extends State<ProfileView> {
                       width: double.infinity,
                       height: 56,
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: appBarOpacity),
+                        color: Colors.white.withValues(
+                          alpha: state.appBarOpacity,
+                        ),
                         border: Border(
                           bottom: BorderSide(
                             color: Colors.black.withValues(
-                              alpha: appBarOpacity,
+                              alpha: state.appBarOpacity,
                             ),
                             width: 0.5,
                           ),
@@ -217,7 +185,7 @@ class _ProfileViewState extends State<ProfileView> {
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.black.withValues(
-                                  alpha: appBarOpacity,
+                                  alpha: state.appBarOpacity,
                                 ),
                               ),
                             ),
@@ -228,7 +196,7 @@ class _ProfileViewState extends State<ProfileView> {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.black.withValues(
-                                  alpha: appBarOpacity,
+                                  alpha: state.appBarOpacity,
                                 ),
                               ),
                             ),
