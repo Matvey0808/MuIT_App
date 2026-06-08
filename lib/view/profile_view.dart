@@ -13,7 +13,7 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> {
+class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver{
   final ScrollController _scrollController = ScrollController();
   late final ProfileCubit cubit;
 
@@ -24,15 +24,22 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     cubit = ProfileCubit();
-
     _scrollController.addListener(scroll);
   }
 
   @override
   void dispose() {
-    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    cubit.updateOpacityAppBar(0.0);
   }
 
   @override
