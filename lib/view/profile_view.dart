@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:muit_app/bloc/profile_cubit.dart';
 import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/widget/bottomSheet_profile_widget.dart';
 import 'package:muit_app/widget/card_profile_widget.dart';
 
 class ProfileView extends StatefulWidget {
@@ -13,7 +14,7 @@ class ProfileView extends StatefulWidget {
   State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver{
+class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
   final ScrollController _scrollController = ScrollController();
   late final ProfileCubit cubit;
 
@@ -41,6 +42,17 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver{
     super.didChangeMetrics();
     cubit.updateOpacityAppBar(0.0);
   }
+
+  final iconsListContacts = [
+    Icon(Icons.phone, size: 32),
+    Icon(Icons.email, size: 32),
+    Icon(Icons.telegram, size: 32),
+  ];
+
+  static final focusedAndEnableBorderTF = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12),
+    borderSide: BorderSide(width: 2, color: Colors.black12)
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +142,76 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver{
                                         ),
                                       ),
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return SizedBox(
+                                                width: double.infinity,
+                                                height: 230,
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        top: 10,
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          GestureDetector(
+                                                            onTap: () =>
+                                                                Navigator.pop(
+                                                                  context,
+                                                                ),
+                                                            child: Column(
+                                                              children: [
+                                                                Card(
+                                                                  color: Colors.black12,
+                                                                  elevation: 0,
+                                                                  shadowColor:
+                                                                  Colors.transparent,
+                                                                  child:
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                        height: 8,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets.only(top: 20),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                              children: iconsListContacts.map((
+                                                                contacts,
+                                                              ) {
+                                                                return BottomSheetProfile(
+                                                                  iconContacts:
+                                                                      contacts,
+                                                                );
+                                                              }).toList(),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding: EdgeInsets.all(24.0),
+                                                            child: TextField(
+                                                              decoration: InputDecoration(
+                                                                hintText: "Contact...",
+                                                                filled: true,
+                                                                focusedBorder: focusedAndEnableBorderTF,
+                                                                enabledBorder: focusedAndEnableBorderTF
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
                                         child: Container(
                                           width: 60,
                                           height: 60,
