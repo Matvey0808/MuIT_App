@@ -132,16 +132,9 @@ class StatusCard extends StatelessWidget {
 }
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({
-    super.key,
-    required this.userConnection,
-    required this.connection,
-    required this.iconConnection,
-  });
+  const ContactCard({super.key, required this.contacts});
 
-  final String userConnection;
-  final String connection;
-  final Icon iconConnection;
+  final Contacts contacts;
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +147,10 @@ class ContactCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Padding(padding: EdgeInsets.only(left: 5), child: iconConnection),
+          Padding(padding: EdgeInsets.only(left: 5), child: contacts.iconContact),
           Padding(
             padding: EdgeInsets.only(left: 10),
-            child: Text("$connection\n$userConnection"),
+            child: Text("${contacts.contact}\n${contacts.userContact}"),
           ),
         ],
       ),

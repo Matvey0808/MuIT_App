@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muit_app/bloc/contact_cubit.dart';
 import 'package:muit_app/bloc/profile_cubit.dart';
 import 'package:muit_app/model/profile_model.dart';
 import 'package:muit_app/widget/bottomSheet_profile_widget.dart';
@@ -43,30 +44,22 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
     cubit.updateOpacityAppBar(0.0);
   }
 
-  final iconsListContacts = [
-    Icon(Icons.phone, size: 32),
-    Icon(Icons.email, size: 32),
-    Icon(Icons.telegram, size: 32),
-  ];
-
-  static final focusedAndEnableBorderTF = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(12),
-    borderSide: BorderSide(width: 2, color: Colors.black12)
-  );
-
   @override
   Widget build(BuildContext context) {
     final experienceText = (widget.experience != null)
         ? widget.experience
         : "Не указан";
-    return BlocProvider.value(
-      value: cubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProfileCubit()),
+        BlocProvider(create: (context) => ContactCubit()),
+      ],
       child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: BlocBuilder<ProfileCubit, Profile>(
-            builder: (context, state) {
-              return Stack(
+        child: BlocBuilder<ProfileCubit, Profile>(
+          builder: (context, state) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Stack(
                 children: [
                   CustomScrollView(
                     controller: _scrollController,
@@ -108,134 +101,32 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: SizedBox(
-                                height: 60,
-                                child: ListView.builder(
-                                  itemCount: 4,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    final contacts = [
-                                      ContactCard(
-                                        userConnection: "+7 923 912 76 12",
-                                        connection: "Телефон",
-                                        iconConnection: Icon(
-                                          Icons.phone,
-                                          size: 34,
-                                        ),
-                                      ),
-                                      ContactCard(
-                                        userConnection: "mgavr26@gmail.com",
-                                        connection: "Почта",
-                                        iconConnection: Icon(
-                                          Icons.email,
-                                          size: 34,
-                                        ),
-                                      ),
-                                      ContactCard(
-                                        userConnection: "@mutablevariable",
-                                        connection: "Telegram",
-                                        iconConnection: Icon(
-                                          Icons.telegram,
-                                          size: 34,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            builder: (context) {
-                                              return SizedBox(
-                                                width: double.infinity,
-                                                height: 230,
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                        top: 10,
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          GestureDetector(
-                                                            onTap: () =>
-                                                                Navigator.pop(
-                                                                  context,
-                                                                ),
-                                                            child: Column(
-                                                              children: [
-                                                                Card(
-                                                                  color: Colors.black12,
-                                                                  elevation: 0,
-                                                                  shadowColor:
-                                                                  Colors.transparent,
-                                                                  child:
-                                                                      SizedBox(
-                                                                        width: 30,
-                                                                        height: 8,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 20),
-                                                            child: Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                              children: iconsListContacts.map((
-                                                                contacts,
-                                                              ) {
-                                                                return BottomSheetProfile(
-                                                                  iconContacts:
-                                                                      contacts,
-                                                                );
-                                                              }).toList(),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.all(24.0),
-                                                            child: TextField(
-                                                              decoration: InputDecoration(
-                                                                hintText: "Contact...",
-                                                                filled: true,
-                                                                focusedBorder: focusedAndEnableBorderTF,
-                                                                enabledBorder: focusedAndEnableBorderTF
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: Container(
-                                          width: 60,
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black12,
-                                            borderRadius: BorderRadius.circular(
-                                              16,
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: Icon(Icons.add, size: 28),
-                                          ),
-                                        ),
-                                      ),
-                                    ];
-                                    return Row(
-                                      children: [
-                                        contacts[index],
-                                        SizedBox(width: 10),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
+                            BlocBuilder<ContactCubit, List<Contacts>>(
+                              builder: (context, state) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: SizedBox(
+                                    height: 60,
+                                    child: ListView.builder(
+                                      itemCount: state.length + 1,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        if (index == state.length) {
+                                          return BottomSheetDialog();
+                                        }
+
+                                        final obj = state[index];
+                                        return Row(
+                                          children: [
+                                            ContactCard(contacts: obj),
+                                            SizedBox(width: 10),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
@@ -310,9 +201,9 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                     ),
                   ),
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
