@@ -150,7 +150,7 @@ class ContactCard extends StatelessWidget {
           Padding(padding: EdgeInsets.only(left: 5), child: contacts.iconContact),
           Padding(
             padding: EdgeInsets.only(left: 10),
-            child: Text("${contacts.contact}\n${contacts.userContact}"),
+            child: Text("${contacts.label}\n${contacts.value}"),
           ),
         ],
       ),

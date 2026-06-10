@@ -14,22 +14,32 @@ class Profile {
   }
 }
 
+enum ContactType { phone, email, telegram }
+
 class Contacts {
-  final String contact;
-  final String userContact;
+  final ContactType type;
   final Icon iconContact;
+  final String label;
+  final String value;
 
   Contacts({
-    required this.contact,
-    required this.userContact,
+    required this.type,
     required this.iconContact,
+    required this.label,
+    required this.value,
   });
 
-  Contacts copyWith({String? contact, String? userContact, Icon? iconContact}) {
+  Contacts copyWith({
+    ContactType? type,
+    Icon? iconContact,
+    String? label,
+    String? value,
+  }) {
     return Contacts(
-      contact: contact ?? this.contact,
-      userContact: userContact ?? this.contact,
+      type: type ?? this.type,
       iconContact: iconContact ?? this.iconContact,
+      label: label ?? this.label,
+      value: value ?? this.value,
     );
   }
 }

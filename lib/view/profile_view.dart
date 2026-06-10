@@ -27,7 +27,6 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    cubit = ProfileCubit();
     _scrollController.addListener(scroll);
   }
 
@@ -112,15 +111,21 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         if (index == state.length) {
-                                          return BottomSheetDialog();
+                                          return Builder(
+                                            builder: (contextBottomSheet) {
+                                              final contactCubit = contextBottomSheet.read<ContactCubit>();
+                                              return BottomSheetDialog(cubit: contactCubit);
+                                            },
+                                          );
                                         }
-
                                         final obj = state[index];
                                         return Row(
                                           children: [
-                                            ContactCard(contacts: obj),
+                                            ContactCard(
+                                              contacts: obj
+                                            ),
                                             SizedBox(width: 10),
-                                          ],
+                                          ]
                                         );
                                       },
                                     ),
