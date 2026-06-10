@@ -25,11 +25,10 @@ class BottomSheetDialog extends StatelessWidget {
   const BottomSheetDialog({super.key, required this.cubit});
 
   final ContactCubit cubit;
+  static final TextEditingController _controllerContact = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _controllerContact = TextEditingController();
-
     final focusedAndEnableBorderTF = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide(width: 2, color: Colors.black12),

@@ -28,7 +28,7 @@ class ContactCubit extends Cubit<List<Contacts>> {
 
   void addContacts(ContactType type, String newValue) {
     final update = state.map((contacts) {
-      if(contacts.type == type) {
+      if(contacts.type == type && newValue.isNotEmpty) {
         return contacts.copyWith(
           value: newValue,
         );
