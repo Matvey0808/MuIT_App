@@ -25,7 +25,8 @@ class BottomSheetDialog extends StatelessWidget {
   const BottomSheetDialog({super.key, required this.cubit});
 
   final ContactCubit cubit;
-  static final TextEditingController _controllerContact = TextEditingController();
+  static final TextEditingController _controllerContact =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +66,14 @@ class BottomSheetDialog extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  cubit.addContacts(
-                                    ContactType.phone,
-                                    _controllerContact.text,
-                                  );
-                                  _controllerContact.clear();
-                                  Navigator.pop(contextSheet);
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.phone,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
                                 },
                                 child: BottomSheetProfileIcon(
                                   iconContacts: Icon(Icons.phone, size: 32),
@@ -78,12 +81,14 @@ class BottomSheetDialog extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  cubit.addContacts(
-                                    ContactType.email,
-                                    _controllerContact.text,
-                                  );
-                                  _controllerContact.clear();
-                                  Navigator.pop(contextSheet);
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.email,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
                                 },
                                 child: BottomSheetProfileIcon(
                                   iconContacts: Icon(Icons.email, size: 32),
@@ -91,12 +96,14 @@ class BottomSheetDialog extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  cubit.addContacts(
-                                    ContactType.telegram,
-                                    _controllerContact.text,
-                                  );
-                                  _controllerContact.clear();
-                                  Navigator.pop(contextSheet);
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.telegram,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
                                 },
                                 child: BottomSheetProfileIcon(
                                   iconContacts: Icon(Icons.telegram, size: 32),
