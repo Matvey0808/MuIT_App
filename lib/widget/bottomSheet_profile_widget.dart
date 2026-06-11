@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:muit_app/bloc/contact_cubit.dart';
+import 'package:muit_app/model/profile_model.dart';
 
 class BottomSheetProfileIcon extends StatelessWidget {
   const BottomSheetProfileIcon({super.key, required this.iconContacts});
@@ -20,7 +22,11 @@ class BottomSheetProfileIcon extends StatelessWidget {
 }
 
 class BottomSheetDialog extends StatelessWidget {
-  const BottomSheetDialog({super.key});
+  const BottomSheetDialog({super.key, required this.cubit});
+
+  final ContactCubit cubit;
+  static final TextEditingController _controllerContact =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +35,11 @@ class BottomSheetDialog extends StatelessWidget {
       borderSide: BorderSide(width: 2, color: Colors.black12),
     );
 
-    final iconsListContacts = [
-      Icon(Icons.phone, size: 32),
-      Icon(Icons.email, size: 32),
-      Icon(Icons.telegram, size: 32),
-    ];
-
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
-          builder: (context) {
+          builder: (contextSheet) {
             return SizedBox(
               width: double.infinity,
               height: 230,
@@ -49,33 +49,73 @@ class BottomSheetDialog extends StatelessWidget {
                     padding: EdgeInsets.only(top: 10),
                     child: Column(
                       children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Column(
-                            children: [
-                              Card(
-                                color: Colors.black12,
-                                elevation: 0,
-                                shadowColor: Colors.transparent,
-                                child: SizedBox(width: 30, height: 8),
-                              ),
-                            ],
-                          ),
+                        Column(
+                          children: [
+                            Card(
+                              color: Colors.black12,
+                              elevation: 0,
+                              shadowColor: Colors.transparent,
+                              child: SizedBox(width: 30, height: 8),
+                            ),
+                          ],
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: iconsListContacts.map((contacts) {
-                              return BottomSheetProfileIcon(
-                                iconContacts: contacts,
-                              );
-                            }).toList(),
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.phone,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
+                                },
+                                child: BottomSheetProfileIcon(
+                                  iconContacts: Icon(Icons.phone, size: 32),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.email,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
+                                },
+                                child: BottomSheetProfileIcon(
+                                  iconContacts: Icon(Icons.email, size: 32),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_controllerContact.text.isNotEmpty) {
+                                    cubit.addContacts(
+                                      ContactType.telegram,
+                                      _controllerContact.text,
+                                    );
+                                    _controllerContact.clear();
+                                    Navigator.pop(contextSheet);
+                                  }
+                                },
+                                child: BottomSheetProfileIcon(
+                                  iconContacts: Icon(Icons.telegram, size: 32),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.all(24.0),
                           child: TextField(
+                            controller: _controllerContact,
                             decoration: InputDecoration(
                               hintText: "Contact...",
                               filled: true,
