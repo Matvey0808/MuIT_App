@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/view/home_view.dart';
-import 'package:muit_app/view/profile_view.dart';
-import 'package:muit_app/view/settings_view.dart';
+import 'package:muit_app/src/features/home/presentation/pages/home_view.dart';
+import 'package:muit_app/src/features/profile/presentation/pages/profile_view.dart';
+import 'package:muit_app/src/features/settings/presentation/pages/settings_view.dart';
 
 class MainNavigationView extends StatefulWidget {
   const MainNavigationView({super.key});

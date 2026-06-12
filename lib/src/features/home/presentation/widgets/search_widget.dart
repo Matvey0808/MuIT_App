@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/bloc/vacancy_cubit.dart';
+import 'package:muit_app/src/features/home/presentation/bloc/vacancy_cubit.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});

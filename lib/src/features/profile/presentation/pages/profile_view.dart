@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/bloc/contact_cubit.dart';
-import 'package:muit_app/bloc/profile_cubit.dart';
-import 'package:muit_app/model/profile_model.dart';
-import 'package:muit_app/widget/bottomSheet_profile_widget.dart';
-import 'package:muit_app/widget/card_profile_widget.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/profile_cubit.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
+import 'package:muit_app/src/features/profile/presentation/widgets/bottomSheet_profile_widget.dart';
+import 'package:muit_app/src/features/profile/presentation/widgets/card_profile_widget.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key, this.experience});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
 
 class InfoProfileCard extends StatelessWidget {
   const InfoProfileCard({super.key, required this.profile});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/bloc/contact_cubit.dart';
-import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
 
 class BottomSheetProfileIcon extends StatelessWidget {
   const BottomSheetProfileIcon({super.key, required this.iconContacts});

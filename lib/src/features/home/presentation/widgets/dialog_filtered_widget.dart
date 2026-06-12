@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/bloc/vacancy_cubit.dart';
+import 'package:muit_app/src/features/home/presentation/bloc/vacancy_cubit.dart';
 
 void showDialogFilter(BuildContext context, VacancyCubit cubit) {
   final List<String> savedFiltersList = List<String>.from(

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/bloc/vacancy_state.dart';
+import 'package:muit_app/src/features/home/data/models/vacancy_state.dart';
 
 class VacancyCubit extends Cubit<List<VacancyState>> {
   static final List<VacancyState> _allVacancy = [
