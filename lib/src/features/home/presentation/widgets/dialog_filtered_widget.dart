@@ -48,7 +48,7 @@ class DialogFilteredWidget extends StatelessWidget {
       actions: <Widget>[
         ElevatedButton(
           onPressed: () {
-            cubit.resetFilters();
+            cubit.applyFilter();
             Navigator.pop(context, false);
           },
           child: Text("Сбросить"),

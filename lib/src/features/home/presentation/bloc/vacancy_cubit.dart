@@ -49,35 +49,15 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
     }).toList();
     emit(filtered);
   }
+
   void restoreFilters(dynamic value, List<String> copyFilters) {
-    if (value == null || value == false) {
-      final copyFiltersList = List<String>.from(selectedVacancy);
-
-      for (var filters in copyFiltersList) {
-        if (selectedVacancy.contains(filters)) {
-          toggleFilter(filters);
-        }
-      }
-
-      for (var filters in copyFilters) {
-        if (!selectedVacancy.contains(filters)) {
-          toggleFilter(filters);
-          applyFilter();
-        }
-      }
-
-      if (value == false) {
-        for (var resetFilters in copyFilters) {
-          if (selectedVacancy.contains(resetFilters)) {
-            emit([..._allVacancy]);
-            toggleFilter(resetFilters);
-          }
-        }
-      }
+    if (value == null) {
+      _selectedVacancy.clear();
+      _selectedVacancy.addAll(copyFilters);
+      applyFilter();
+    } else if (value == false) {
+      _selectedVacancy.clear();
+      emit([...allVacancy]);
     }
-  }
-
-  void resetFilters() {
-    emit([..._allVacancy]);
   }
 }
