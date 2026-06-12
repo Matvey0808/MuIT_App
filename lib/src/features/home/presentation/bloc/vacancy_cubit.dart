@@ -39,18 +39,45 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
       emit(List.from(_allVacancy));
       return;
     }
-    
+
     final filtered = _allVacancy.where((vacancy) {
       final nameLower = vacancy.name.toLowerCase();
 
       return _selectedVacancy.any((filter) {
-      return nameLower.contains(filter.toLowerCase());
+        return nameLower.contains(filter.toLowerCase());
       });
     }).toList();
     emit(filtered);
   }
+  void restoreFilters(dynamic value, List<String> copyFilters) {
+    if (value == null || value == false) {
+      final copyFiltersList = List<String>.from(selectedVacancy);
 
-  void resetFilter() {
+      for (var filters in copyFiltersList) {
+        if (selectedVacancy.contains(filters)) {
+          toggleFilter(filters);
+        }
+      }
+
+      for (var filters in copyFilters) {
+        if (!selectedVacancy.contains(filters)) {
+          toggleFilter(filters);
+          applyFilter();
+        }
+      }
+
+      if (value == false) {
+        for (var resetFilters in copyFilters) {
+          if (selectedVacancy.contains(resetFilters)) {
+            emit([..._allVacancy]);
+            toggleFilter(resetFilters);
+          }
+        }
+      }
+    }
+  }
+
+  void resetFilters() {
     emit([..._allVacancy]);
   }
 }
