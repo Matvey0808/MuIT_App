@@ -6,6 +6,7 @@ import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/bottomSheet_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/card_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/info_user_widget.dart';
+import 'package:muit_app/src/features/profile/presentation/widgets/status_profile_widget.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key, this.experience});
@@ -86,7 +87,7 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: StatusCard(),
+                              child: StatusProfile(),
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
