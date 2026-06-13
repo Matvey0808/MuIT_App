@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:muit_app/src/features/home/presentation/bloc/vacancy_cubit.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 void showDialogFilter(BuildContext context, VacancyCubit cubit) {
-  final List<String> savedFiltersList = List<String>.from(cubit.selectedVacancy);
+  final List<String> savedFiltersList = List<String>.from(
+    cubit.selectedVacancy,
+  );
   showDialog(
     context: context,
     builder: (dialogFilter) {
@@ -24,7 +27,10 @@ class DialogFilteredWidget extends StatelessWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(padding: EdgeInsets.only(bottom: 10), child: Text("Фильтры")),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Text("Фильтры", style: UIStyle.averageText),
+          ),
           Divider(height: 0, color: Colors.black),
           StatefulBuilder(
             builder: (context, setState) {
@@ -51,14 +57,14 @@ class DialogFilteredWidget extends StatelessWidget {
             cubit.applyFilter();
             Navigator.pop(context, false);
           },
-          child: Text("Сбросить"),
+          child: Text("Сбросить", style: UIStyle.averageText),
         ),
         ElevatedButton(
           onPressed: () {
             cubit.applyFilter();
             Navigator.pop(context, true);
           },
-          child: Text("Применить"),
+          child: Text("Применить", style: UIStyle.averageText),
         ),
       ],
     );

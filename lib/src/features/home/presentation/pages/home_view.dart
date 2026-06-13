@@ -5,6 +5,7 @@ import 'package:muit_app/src/features/home/data/models/vacancy_state.dart';
 import 'package:muit_app/src/features/home/presentation/widgets/dialog_filtered_widget.dart';
 import 'package:muit_app/src/features/home/presentation/widgets/search_widget.dart';
 import 'package:muit_app/src/features/home/presentation/widgets/vacancy_widget.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -27,9 +28,7 @@ class HomeView extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: SearchWidget(),
-                            ),
+                            Expanded(child: SearchWidget()),
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: IconButton(
@@ -45,7 +44,12 @@ class HomeView extends StatelessWidget {
                       ),
                       Expanded(
                         child: state.isEmpty
-                            ? Center(child: Text("Ничего не найдено"))
+                            ? Center(
+                                child: Text(
+                                  "Ничего не найдено",
+                                  style: UIStyle.averageText,
+                                ),
+                              )
                             : ListView.builder(
                                 itemCount: state.length,
                                 itemBuilder: (context, index) {
@@ -64,7 +68,7 @@ class HomeView extends StatelessWidget {
               },
             ),
           );
-        }
+        },
       ),
     );
   }

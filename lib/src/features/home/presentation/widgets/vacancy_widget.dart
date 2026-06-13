@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 class VacancyWidget extends StatelessWidget {
   const VacancyWidget({
@@ -26,17 +27,17 @@ class VacancyWidget extends StatelessWidget {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(name),
+              child: Text(name, style: UIStyle.averageText),
             ),
             SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text("От $pay"),
+              child: Text("От $pay", style: UIStyle.averageText),
             ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
-              child: Text(city),
+              child: Text(city, style: UIStyle.averageText),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
@@ -51,11 +52,7 @@ class VacancyWidget extends StatelessWidget {
                 ),
                 child: Text(
                   "Откликнуться",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: UIStyle.averageText
                 ),
               ),
             ),
