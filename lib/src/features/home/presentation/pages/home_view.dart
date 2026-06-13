@@ -55,9 +55,7 @@ class HomeView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final object = state[index];
                                   return VacancyWidget(
-                                    name: object.name,
-                                    pay: object.pay,
-                                    city: object.city,
+                                    vacancy: object,
                                   );
                                 },
                               ),

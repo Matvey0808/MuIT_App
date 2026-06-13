@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:muit_app/src/features/home/data/models/vacancy_state.dart';
 import 'package:muit_app/utils/ui_utils.dart';
 
 class VacancyWidget extends StatelessWidget {
   const VacancyWidget({
     super.key,
-    required this.name,
-    required this.pay,
-    required this.city,
+    required this.vacancy
   });
-  final String name;
-  final String pay;
-  final String city;
+  
+  final VacancyState vacancy;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +25,17 @@ class VacancyWidget extends StatelessWidget {
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text(name, style: UIStyle.averageText),
+              child: Text(vacancy.name, style: UIStyle.averageText),
             ),
             SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text("От $pay", style: UIStyle.averageText),
+              child: Text("От ${vacancy.pay}", style: UIStyle.averageText),
             ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
-              child: Text(city, style: UIStyle.averageText),
+              child: Text(vacancy.city, style: UIStyle.averageText),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
