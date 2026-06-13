@@ -9,6 +9,19 @@ class UIStyle {
   static const TextStyle averageText = TextStyle(
     fontSize: 15,
     color: Colors.black,
-    fontWeight: FontWeight.w400
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle styleProfileText = TextStyle(
+    fontSize: 14,
+    color: Colors.black45,
+    fontWeight: FontWeight.w600,
+  );
+
+  static ButtonStyle styleButtonProfile = ElevatedButton.styleFrom(
+    backgroundColor: Colors.white54,
+    elevation: 0,
+    shadowColor: Colors.transparent,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   );
 }
