@@ -5,6 +5,7 @@ import 'package:muit_app/src/features/profile/presentation/bloc/profile_cubit.da
 import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/bottomSheet_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/card_profile_widget.dart';
+import 'package:muit_app/src/features/profile/presentation/widgets/contacts_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/info_user_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/status_profile_widget.dart';
 
@@ -123,7 +124,7 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                                         final obj = state[index];
                                         return Row(
                                           children: [
-                                            ContactCard(
+                                            ContactProfile(
                                               contacts: obj
                                             ),
                                             SizedBox(width: 10),
