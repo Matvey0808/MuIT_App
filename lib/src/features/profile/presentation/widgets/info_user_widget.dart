@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_appbar_model.dart';
 import 'package:muit_app/utils/ui_utils.dart';
 
 class InfoUserProfile extends StatelessWidget {
   const InfoUserProfile({super.key, required this.profile});
 
-  final Profile profile;
+  final ProfileAppBar profile;
 
   @override
   Widget build(BuildContext context) {

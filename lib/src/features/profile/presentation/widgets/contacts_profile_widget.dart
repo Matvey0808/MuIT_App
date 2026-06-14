@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/contact_model.dart';
 
 class ContactProfile extends StatelessWidget {
   const ContactProfile({super.key, required this.contacts});

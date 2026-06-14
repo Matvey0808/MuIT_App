@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muit_app/src/features/profile/data/models/contact_model.dart';
 import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.dart';
 import 'package:muit_app/src/features/profile/presentation/bloc/profile_cubit.dart';
-import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_appbar_model.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/bottomSheet_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/contacts_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/experience_profile_widget.dart';
@@ -57,7 +58,7 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
         BlocProvider(create: (context) => ContactCubit()),
       ],
       child: SafeArea(
-        child: BlocBuilder<ProfileCubit, Profile>(
+        child: BlocBuilder<ProfileCubit, ProfileAppBar>(
           builder: (context, state) {
             return Scaffold(
               backgroundColor: Colors.white,
