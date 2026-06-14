@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:muit_app/src/features/profile/data/models/status_model.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 class StatusProfile extends StatelessWidget {
   const StatusProfile({super.key, this.status});
@@ -20,25 +21,21 @@ class StatusProfile extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: (status?.status != null)
-                  ? Text("Статус поиска: ${status?.status}")
-                  : Text("Статус поиска: Не указано"),
+              child: Text("Статус поиска: ${UIStyle.getValueOrEmpty(status?.status)}")
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: (status?.city != null)
-                  ? Text("Город проживания: ${status?.city}")
-                  : Text("Город проживания: Не указано"),
+              child: Text("Город проживания: ${UIStyle.getValueOrEmpty(status?.city)}")
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: (status?.target != null) ? Text("Что интересно: ${status?.target}") : Text("Что интересно: Не указано"),
+              child: Text("Что интересно: ${UIStyle.getValueOrEmpty(status?.target)}")
             ),
           ),
           SizedBox(height: 30),
@@ -47,18 +44,11 @@ class StatusProfile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(6.0),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white54,
-                  elevation: 0,
-                  shadowColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
+                style: UIStyle.styleButtonProfile,
                 onPressed: () {},
                 child: Text(
                   "Редактировать",
-                  style: TextStyle(color: Colors.black45),
+                  style: UIStyle.styleProfileText,
                 ),
               ),
             ),

@@ -24,4 +24,8 @@ class UIStyle {
     shadowColor: Colors.transparent,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   );
+
+  static String getValueOrEmpty(String? value) {
+    return value ?? "Не указано";
+  } 
 }
