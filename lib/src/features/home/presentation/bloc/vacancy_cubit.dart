@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/bloc/vacancy_state.dart';
+import 'package:muit_app/src/features/home/data/models/vacancy_state.dart';
 
 class VacancyCubit extends Cubit<List<VacancyState>> {
   static final List<VacancyState> _allVacancy = [
@@ -39,18 +39,25 @@ class VacancyCubit extends Cubit<List<VacancyState>> {
       emit(List.from(_allVacancy));
       return;
     }
-    
+
     final filtered = _allVacancy.where((vacancy) {
       final nameLower = vacancy.name.toLowerCase();
 
       return _selectedVacancy.any((filter) {
-      return nameLower.contains(filter.toLowerCase());
+        return nameLower.contains(filter.toLowerCase());
       });
     }).toList();
     emit(filtered);
   }
 
-  void resetFilter() {
-    emit([..._allVacancy]);
+  void restoreFilters(dynamic value, List<String> copyFilters) {
+    if (value == null) {
+      _selectedVacancy.clear();
+      _selectedVacancy.addAll(copyFilters);
+      applyFilter();
+    } else if (value == false) {
+      _selectedVacancy.clear();
+      emit([...allVacancy]);
+    }
   }
 }

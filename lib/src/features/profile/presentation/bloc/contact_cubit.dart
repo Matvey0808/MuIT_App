@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/contact_model.dart';
 
 class ContactCubit extends Cubit<List<Contacts>> {
   ContactCubit() : super(_initialContacts);

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/bloc/vacancy_cubit.dart';
-import 'package:muit_app/bloc/vacancy_state.dart';
-import 'package:muit_app/widget/dialog_filtered_widget.dart';
-import 'package:muit_app/widget/search_widget.dart';
-import 'package:muit_app/widget/vacancy_widget.dart';
+import 'package:muit_app/src/features/home/presentation/bloc/vacancy_cubit.dart';
+import 'package:muit_app/src/features/home/data/models/vacancy_state.dart';
+import 'package:muit_app/src/features/home/presentation/widgets/dialog_filtered_widget.dart';
+import 'package:muit_app/src/features/home/presentation/widgets/search_widget.dart';
+import 'package:muit_app/src/features/home/presentation/widgets/vacancy_widget.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -27,9 +28,7 @@ class HomeView extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: SearchWidget(),
-                            ),
+                            Expanded(child: SearchWidget()),
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: IconButton(
@@ -45,15 +44,18 @@ class HomeView extends StatelessWidget {
                       ),
                       Expanded(
                         child: state.isEmpty
-                            ? Center(child: Text("Ничего не найдено"))
+                            ? Center(
+                                child: Text(
+                                  "Ничего не найдено",
+                                  style: UIStyle.averageText,
+                                ),
+                              )
                             : ListView.builder(
                                 itemCount: state.length,
                                 itemBuilder: (context, index) {
                                   final object = state[index];
                                   return VacancyWidget(
-                                    name: object.name,
-                                    pay: object.pay,
-                                    city: object.city,
+                                    vacancy: object,
                                   );
                                 },
                               ),
@@ -64,7 +66,7 @@ class HomeView extends StatelessWidget {
               },
             ),
           );
-        }
+        },
       ),
     );
   }

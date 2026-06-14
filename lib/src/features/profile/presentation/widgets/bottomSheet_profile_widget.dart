@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/bloc/contact_cubit.dart';
-import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/contact_model.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.dart';
+import 'package:muit_app/utils/ui_utils.dart';
 
 class BottomSheetProfileIcon extends StatelessWidget {
   const BottomSheetProfileIcon({super.key, required this.iconContacts});
@@ -25,16 +26,15 @@ class BottomSheetDialog extends StatelessWidget {
   const BottomSheetDialog({super.key, required this.cubit});
 
   final ContactCubit cubit;
-  static final TextEditingController _controllerContact =
-      TextEditingController();
+  static final TextEditingController _controllerContact = TextEditingController();
+  static final options = [
+      ContactsOption(ContactType.phone, Icon(Icons.phone, size: 32)),
+      ContactsOption(ContactType.email, Icon(Icons.email, size: 32)),
+      ContactsOption(ContactType.telegram, Icon(Icons.telegram, size: 32)),
+    ];
 
   @override
   Widget build(BuildContext context) {
-    final focusedAndEnableBorderTF = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(width: 2, color: Colors.black12),
-    );
-
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -63,12 +63,12 @@ class BottomSheetDialog extends StatelessWidget {
                           padding: EdgeInsets.only(top: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
+                            children: options.map((option) {
+                              return GestureDetector(
                                 onTap: () {
                                   if (_controllerContact.text.isNotEmpty) {
                                     cubit.addContacts(
-                                      ContactType.phone,
+                                      option.type,
                                       _controllerContact.text,
                                     );
                                     _controllerContact.clear();
@@ -76,40 +76,10 @@ class BottomSheetDialog extends StatelessWidget {
                                   }
                                 },
                                 child: BottomSheetProfileIcon(
-                                  iconContacts: Icon(Icons.phone, size: 32),
+                                  iconContacts: option.iconContact,
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  if (_controllerContact.text.isNotEmpty) {
-                                    cubit.addContacts(
-                                      ContactType.email,
-                                      _controllerContact.text,
-                                    );
-                                    _controllerContact.clear();
-                                    Navigator.pop(contextSheet);
-                                  }
-                                },
-                                child: BottomSheetProfileIcon(
-                                  iconContacts: Icon(Icons.email, size: 32),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  if (_controllerContact.text.isNotEmpty) {
-                                    cubit.addContacts(
-                                      ContactType.telegram,
-                                      _controllerContact.text,
-                                    );
-                                    _controllerContact.clear();
-                                    Navigator.pop(contextSheet);
-                                  }
-                                },
-                                child: BottomSheetProfileIcon(
-                                  iconContacts: Icon(Icons.telegram, size: 32),
-                                ),
-                              ),
-                            ],
+                              );
+                            }).toList(),
                           ),
                         ),
                         Padding(
@@ -119,8 +89,8 @@ class BottomSheetDialog extends StatelessWidget {
                             decoration: InputDecoration(
                               hintText: "Contact...",
                               filled: true,
-                              focusedBorder: focusedAndEnableBorderTF,
-                              enabledBorder: focusedAndEnableBorderTF,
+                              focusedBorder: UIStyle.focusedAndEnable,
+                              enabledBorder: UIStyle.focusedAndEnable,
                             ),
                           ),
                         ),

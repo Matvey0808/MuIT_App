@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:muit_app/model/profile_model.dart';
+import 'package:muit_app/src/features/profile/data/models/profile_appbar_model.dart';
 
-class ProfileCubit extends Cubit<Profile> {
+class ProfileCubit extends Cubit<ProfileAppBar> {
   ProfileCubit() : super(
-    Profile(name: "Matvey Gavrilyuk", appBarOpacity: 0.0)
+    ProfileAppBar(name: "Matvey Gavrilyuk", appBarOpacity: 0.0)
   );
 
   void updateOpacityAppBar(double offset) {

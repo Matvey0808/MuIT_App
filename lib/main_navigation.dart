@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:muit_app/view/home_view.dart';
-import 'package:muit_app/view/profile_view.dart';
-import 'package:muit_app/view/settings_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:muit_app/src/features/home/presentation/pages/home_view.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.dart';
+import 'package:muit_app/src/features/profile/presentation/bloc/profile_cubit.dart';
+import 'package:muit_app/src/features/profile/presentation/pages/profile_view.dart';
+import 'package:muit_app/src/features/settings/presentation/pages/settings_view.dart';
 
 class MainNavigationView extends StatefulWidget {
   const MainNavigationView({super.key});
@@ -12,6 +15,14 @@ class MainNavigationView extends StatefulWidget {
 
 class _MainNavigationViewState extends State<MainNavigationView> {
   int cur = 1;
+
+  final profileView = MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (context) => ProfileCubit()),
+      BlocProvider(create: (context) => ContactCubit()),
+    ],
+    child: const ProfileView(key: PageStorageKey('profile')),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +37,7 @@ class _MainNavigationViewState extends State<MainNavigationView> {
         visible: cur == 1,
         child: const HomeView(key: PageStorageKey('home')),
       ),
-      FadeSlideTransition(
-        visible: cur == 2,
-        child: const ProfileView(key: PageStorageKey('profile')),
-      ),
+      FadeSlideTransition(visible: cur == 2, child: profileView),
     ];
 
     return Scaffold(
@@ -144,10 +152,7 @@ class _FadeSlideTransitionState extends State<FadeSlideTransition>
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _offsetAnimation,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: widget.child,
-      ),
+      child: FadeTransition(opacity: _fadeAnimation, child: widget.child),
     );
   }
 }
