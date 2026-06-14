@@ -25,7 +25,7 @@ class UIStyle {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   );
 
-  static String getValueOrEmpty(String? value) {
-    return value ?? "Не указано";
+  static String getValueOrEmpty(String? value, {String notSpecified = "Не указано"}) {
+    return value ?? notSpecified;
   } 
 }

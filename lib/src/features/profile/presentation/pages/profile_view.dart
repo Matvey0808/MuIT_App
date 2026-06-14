@@ -4,8 +4,8 @@ import 'package:muit_app/src/features/profile/presentation/bloc/contact_cubit.da
 import 'package:muit_app/src/features/profile/presentation/bloc/profile_cubit.dart';
 import 'package:muit_app/src/features/profile/data/models/profile_model.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/bottomSheet_profile_widget.dart';
-import 'package:muit_app/src/features/profile/presentation/widgets/card_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/contacts_profile_widget.dart';
+import 'package:muit_app/src/features/profile/presentation/widgets/experience_profile_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/info_user_widget.dart';
 import 'package:muit_app/src/features/profile/presentation/widgets/status_profile_widget.dart';
 
@@ -151,11 +151,7 @@ class _ProfileViewState extends State<ProfileView> with WidgetsBindingObserver {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: ExperienceCard(
-                                experience: "2 года",
-                                work: "DevOps",
-                                period: "Июль 2023 - август 2025",
-                              ),
+                              child: ExperienceProfile(),
                             ),
                           ],
                         ),
