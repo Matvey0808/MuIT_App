@@ -25,7 +25,28 @@ class UIStyle {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   );
 
-  static String getValueOrEmpty(String? value, {String notSpecified = "Не указано"}) {
+  static String getValueOrEmpty(
+    String? value, {
+    String notSpecified = "Не указано",
+  }) {
     return value ?? notSpecified;
-  } 
+  }
+
+  static const TextStyle styleAuthTest = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.w900,
+  );
+
+  static ButtonStyle styleButtonAuth = ElevatedButton.styleFrom(
+    backgroundColor: Colors.black,
+    elevation: 0,
+    shadowColor: Colors.transparent,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+  );
+
+  static const TextStyle styleAuthText = TextStyle(
+    fontSize: 14,
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+  );
 }
